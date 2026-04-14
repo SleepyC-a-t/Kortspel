@@ -250,6 +250,12 @@ def main():
     #text for info single
     text_starting_info, textpos_starting_info = text(fortuner_font, 50, "Info", (10, 10, 10), x//2+460, y//2-160)
 
+    #background for info page
+    background_info, background_info_pos = button(900, 450, "dimgray", x//2, y//2)
+
+    #background exit info
+    background_info_exit, background_info_exit_pos = button (50, 50, "red", x//2+425, y//2-200)
+
     #makes it so you can select frame rate (the speed that the code runs), is selected at the end of the game loop
     clock = pg.time.Clock()
 
@@ -528,48 +534,51 @@ def main():
             pg.display.update()
         
         elif start == "poker" and singleplayer == True:
-            hover_logic(background_starting_exit_pos, background_starting_exit, "lightgray", "white")
-            hover_logic(button_starting_single_minus_pos, button_starting_single_minus, "lightgray", "white")
-            hover_logic(button_starting_single_plus_pos, button_starting_single_plus, "lightgray", "white")
-            hover_logic(background_starting_single_dif_plus_pos, background_starting_single_dif_plus, "lightgray", "white")
-            hover_logic(background_starting_single_dif_minus_pos, background_starting_single_dif_minus, "lightgray", "white")
-            hover_logic(background_fold_down_pos, background_fold_down, "lightgray", "white")
-            hover_logic(background_starting_start_pos, background_starting_start, "lightgray", "white")
-            hover_logic(background_starting_info_pos, background_starting_info, "lightgray", "white")
+            if info != True:
+                hover_logic(background_starting_exit_pos, background_starting_exit, "lightgray", "white")
+                hover_logic(button_starting_single_minus_pos, button_starting_single_minus, "lightgray", "white")
+                hover_logic(button_starting_single_plus_pos, button_starting_single_plus, "lightgray", "white")
+                hover_logic(background_starting_single_dif_plus_pos, background_starting_single_dif_plus, "lightgray", "white")
+                hover_logic(background_starting_single_dif_minus_pos, background_starting_single_dif_minus, "lightgray", "white")
+                hover_logic(background_fold_down_pos, background_fold_down, "lightgray", "white")
+                hover_logic(background_starting_start_pos, background_starting_start, "lightgray", "white")
+                hover_logic(background_starting_info_pos, background_starting_info, "lightgray", "white")
 
-            if click(button_starting_single_minus_pos):
-                if bot > 1:
-                    bot-=1
+            if info != True:
+
+                if click(button_starting_single_minus_pos):
+                    if bot > 1:
+                        bot-=1
             
-            if click(button_starting_single_plus_pos):
-                if bot <9:
-                    bot+=1
+                if click(button_starting_single_plus_pos):
+                    if bot <9:
+                        bot+=1
 
-            if click(background_starting_exit_pos):
-                print("Exit")
-                bot = 1
-                dif = 2
-                start = "menu"
+                if click(background_starting_exit_pos):
+                    print("Exit")
+                    bot = 1
+                    dif = 2
+                    start = "menu"
 
-            if click(background_starting_single_dif_minus_pos):
-                if dif >1:
-                    dif-=1
+                if click(background_starting_single_dif_minus_pos):
+                    if dif >1:
+                        dif-=1
 
-            if click(background_starting_single_dif_plus_pos):
-                if dif <3:
-                    dif+=1
+                if click(background_starting_single_dif_plus_pos):
+                    if dif <3:
+                        dif+=1
 
-            if click(background_fold_down_pos):
-                if fold_poker == True:
-                    fold_poker = False
-                else:
-                    fold_poker = True
+                if click(background_fold_down_pos):
+                    if fold_poker == True:
+                        fold_poker = False
+                    else:
+                        fold_poker = True
 
-            if click(background_starting_start_pos):
-                print("Start")
+                if click(background_starting_start_pos):
+                    print("Start")
 
-            if click(textpos_starting_info):
-                info = True
+                if click(textpos_starting_info):
+                    info = True
             
             #text for bot amount single
             if bot != bot1:
@@ -642,6 +651,11 @@ def main():
                 screen.blit(text_fold_down1, textpos_fold_down1)
                 screen.blit(text_fold_down2, textpos_fold_down2)
                 screen.blit(text_fold_down3, textpos_fold_down3)
+
+            if info == True:
+                hover_logic(background_info_exit_pos, background_info_exit, "darkred", "crimson")
+                screen.blit(background_info, background_info_pos)
+                screen.blit(background_info_exit, background_info_exit_pos)
 
             pg.display.update()
 
