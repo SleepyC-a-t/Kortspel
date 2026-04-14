@@ -653,6 +653,7 @@ def main():
             hover_logic(background_starting_single_dif_minus_pos, background_starting_single_dif_minus, "lightgray", "white")
             hover_logic(background_fold_down_pos, background_fold_down, "lightgray", "white")
             hover_logic(background_starting_start_pos, background_starting_start, "lightgray", "white")
+            hover_logic(background_starting_info_pos, background_starting_info, "lightgray", "white")
 
             if click(button_starting_single_minus_pos):
                 if bot > 1:
