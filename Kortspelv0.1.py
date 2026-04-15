@@ -252,9 +252,13 @@ def main():
 
     #background for info page
     background_info, background_info_pos = button(900, 450, "dimgray", x//2, y//2)
+    background_info_frame, background_info_frame_pos = button(904, 454, "black", x//2, y//2)
 
     #background exit info
-    background_info_exit, background_info_exit_pos = button (50, 50, "red", x//2+425, y//2-200)
+    background_info_exit, background_info_exit_pos = button(50, 50, "red", x//2+425, y//2-200)
+
+    #text exit info
+    text_info_exit, textpos_info_exit = text(fortuner_font, 50, "X", (10, 10, 10), x//2+425, y//2-200)
 
     #makes it so you can select frame rate (the speed that the code runs), is selected at the end of the game loop
     clock = pg.time.Clock()
@@ -577,7 +581,7 @@ def main():
                 if click(background_starting_start_pos):
                     print("Start")
 
-                if click(textpos_starting_info):
+                if click(background_starting_info_pos):
                     info = True
             
             #text for bot amount single
@@ -654,8 +658,12 @@ def main():
 
             if info == True:
                 hover_logic(background_info_exit_pos, background_info_exit, "darkred", "crimson")
+                if click(background_info_exit_pos):
+                    info = False
+                screen.blit(background_info_frame, background_info_frame_pos)
                 screen.blit(background_info, background_info_pos)
                 screen.blit(background_info_exit, background_info_exit_pos)
+                screen.blit(text_info_exit, textpos_info_exit)
 
             pg.display.update()
 
@@ -700,7 +708,7 @@ def main():
             if click(background_starting_start_pos):
                 print("Start")
 
-            if click(textpos_starting_info):
+            if click(background_starting_info_pos):
                 info = True
 
             #text for bot amount single
@@ -753,6 +761,15 @@ def main():
                 screen.blit(background_fold_down2, background_fold_down2_pos)
                 screen.blit(text_fold_down11, textpos_fold_down11)
                 screen.blit(text_fold_down22, textpos_fold_down22)
+
+            if info == True:
+                hover_logic(background_info_exit_pos, background_info_exit, "darkred", "crimson")
+                if click(background_info_exit_pos):
+                    info = False
+                screen.blit(background_info_frame, background_info_frame_pos)
+                screen.blit(background_info, background_info_pos)
+                screen.blit(background_info_exit, background_info_exit_pos)
+                screen.blit(text_info_exit, textpos_info_exit)
 
                 if click(background_fold_down1_pos):
                     fold_poker = False
