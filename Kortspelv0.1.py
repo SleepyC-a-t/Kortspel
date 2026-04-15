@@ -677,39 +677,40 @@ def main():
             hover_logic(background_starting_start_pos, background_starting_start, "lightgray", "white")
             hover_logic(background_starting_info_pos, background_starting_info, "lightgray", "white")
 
-            if click(button_starting_single_minus_pos):
-                if bot > 1:
-                    bot-=1
+            if info != True:
+                if click(button_starting_single_minus_pos):
+                    if bot > 1:
+                        bot-=1
             
-            if click(button_starting_single_plus_pos) == True:
-                if bot <4:
-                    bot+=1
+                if click(button_starting_single_plus_pos) == True:
+                    if bot <4:
+                        bot+=1
 
-            if click(background_starting_exit_pos) == True:
-                print("Exit")
-                bot = 1
-                dif = 2
-                start = "menu"
+                if click(background_starting_exit_pos) == True:
+                    print("Exit")
+                    bot = 1
+                    dif = 2
+                    start = "menu"
 
-            if click(background_starting_single_dif_minus_pos):
-                if dif >1:
-                    dif-=1
+                if click(background_starting_single_dif_minus_pos):
+                    if dif >1:
+                        dif-=1
 
-            if click(background_starting_single_dif_plus_pos):
-                if dif <3:
-                    dif+=1
+                if click(background_starting_single_dif_plus_pos):
+                    if dif <3:
+                        dif+=1
 
-            if click(background_fold_down_pos):
-                if fold_poker == True:
-                    fold_poker = False
-                else:
-                    fold_poker = True
+                if click(background_fold_down_pos):
+                    if fold_poker == True:
+                        fold_poker = False
+                    else:
+                        fold_poker = True
 
-            if click(background_starting_start_pos):
-                print("Start")
+                if click(background_starting_start_pos):
+                    print("Start")
 
-            if click(background_starting_info_pos):
-                info = True
+                if click(background_starting_info_pos):
+                    info = True
 
             #text for bot amount single
             if bot != bot1:
