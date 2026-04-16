@@ -251,7 +251,7 @@ def main():
     text_starting_info, textpos_starting_info = text(fortuner_font, 50, "Info", (10, 10, 10), x//2+460, y//2-160)
 
     #background for info page
-    background_info, background_info_pos = button(900, 450, "dimgray", x//2, y//2)
+    background_info, background_info_pos = button(900, 450, "gray55", x//2, y//2)
     background_info_frame, background_info_frame_pos = button(904, 454, "black", x//2, y//2)
 
     #background exit info
@@ -668,14 +668,15 @@ def main():
             pg.display.update()
 
         elif start == "vänd10" and singleplayer == True:
-            hover_logic(background_starting_exit_pos, background_starting_exit, "lightgray", "white")
-            hover_logic(button_starting_single_minus_pos, button_starting_single_minus, "lightgray", "white")
-            hover_logic(button_starting_single_plus_pos, button_starting_single_plus, "lightgray", "white")
-            hover_logic(background_starting_single_dif_plus_pos, background_starting_single_dif_plus, "lightgray", "white")
-            hover_logic(background_starting_single_dif_minus_pos, background_starting_single_dif_minus, "lightgray", "white")
-            hover_logic(background_fold_down_pos, background_fold_down, "lightgray", "white")
-            hover_logic(background_starting_start_pos, background_starting_start, "lightgray", "white")
-            hover_logic(background_starting_info_pos, background_starting_info, "lightgray", "white")
+            if info != True:
+                hover_logic(background_starting_exit_pos, background_starting_exit, "lightgray", "white")
+                hover_logic(button_starting_single_minus_pos, button_starting_single_minus, "lightgray", "white")
+                hover_logic(button_starting_single_plus_pos, button_starting_single_plus, "lightgray", "white")
+                hover_logic(background_starting_single_dif_plus_pos, background_starting_single_dif_plus, "lightgray", "white")
+                hover_logic(background_starting_single_dif_minus_pos, background_starting_single_dif_minus, "lightgray", "white")
+                hover_logic(background_fold_down_pos, background_fold_down, "lightgray", "white")
+                hover_logic(background_starting_start_pos, background_starting_start, "lightgray", "white")
+                hover_logic(background_starting_info_pos, background_starting_info, "lightgray", "white")
 
             if info != True:
                 if click(button_starting_single_minus_pos):
@@ -758,6 +759,12 @@ def main():
             if fold_poker == True:
                 hover_logic(background_fold_down1_pos, background_fold_down1, "lightgray", "white")
                 hover_logic(background_fold_down2_pos, background_fold_down2, "lightgray", "white")
+                if click(background_fold_down1_pos):
+                    mode = "Utan stege"
+                    fold_poker = False
+                if click(background_fold_down2_pos):
+                    mode = "Med stege"
+                    fold_poker = False
                 screen.blit(background_fold_down1, background_fold_down1_pos)
                 screen.blit(background_fold_down2, background_fold_down2_pos)
                 screen.blit(text_fold_down11, textpos_fold_down11)
