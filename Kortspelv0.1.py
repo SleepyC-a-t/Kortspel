@@ -260,6 +260,12 @@ def main():
     #text exit info
     text_info_exit, textpos_info_exit = text(fortuner_font, 50, "X", (10, 10, 10), x//2+425, y//2-200)
 
+    #text for bot playstyle
+    text_bot_style, textpos_bot_style = text(fortuner_font, 36, "Bot typ", (10, 10, 10), x//2-345, y//2+50)
+
+    #text for buy in
+    text_poker_in, textpos_poker_in = text(fortuner_font, 50, "Köp in", (10, 10, 10), x//2, y//2)
+
     #makes it so you can select frame rate (the speed that the code runs), is selected at the end of the game loop
     clock = pg.time.Clock()
 
@@ -623,6 +629,7 @@ def main():
             screen.blit(text_starting_start, textpos_starting_start)
             screen.blit(background_starting_info, background_starting_info_pos)
             screen.blit(text_starting_info, textpos_starting_info)
+            screen.blit(text_bot_style, textpos_bot_style)
 
             #if info == True:
 
@@ -786,8 +793,6 @@ def main():
                 if click(background_fold_down2_pos):
                     fold_poker = False
                     mode = "Med stege"
-
-                
 
             pg.display.update()
 
