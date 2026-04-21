@@ -27,13 +27,18 @@ def main():
     mode1 = None
     fold_poker = False
     info = False
+    hover_any = False
+    bot_type = 1
+    previous_bot_type = 2
 
     #below is functions used in the code
     def hover_logic(background_pos, background, colour_before, colour_after):
         """background position, background, colour without mouse, colour with mouse, returns background"""
+        nonlocal hover_any
         
         if background_pos.collidepoint(mouse_pos):
             background.fill(colour_after)
+            hover_any = True
         else:
             background.fill(colour_before)
         
@@ -211,8 +216,8 @@ def main():
     #buttons for bot difficulity
     background_starting_single_dif, background_starting_single_dif_pos = button(300, 50, "lightgray", x//2-345, y//2-30)
     #buttons for +, -
-    background_starting_single_dif_plus, background_starting_single_dif_plus_pos = button(50, 50, "lightgray", x//2-170, y//2-30)
-    background_starting_single_dif_minus, background_starting_single_dif_minus_pos = button(50, 50, "lightgray", x//2-520, y//2-30)
+    background_starting_single_dif_plus, background_starting_single_dif_plus_pos = button(50, 50, "red", x//2-170, y//2-30)
+    background_starting_single_dif_minus, background_starting_single_dif_minus_pos = button(50, 50, "green", x//2-520, y//2-30)
 
     #text for bot difficulity
     text_starting_single_easydif, textpos_starting_single_easydif = text(fortuner_font, 48, "Lätt", (10, 10, 10), x//2-345, y//2-30)
@@ -263,6 +268,17 @@ def main():
     #text for bot playstyle
     text_bot_style, textpos_bot_style = text(fortuner_font, 36, "Bot typ", (10, 10, 10), x//2-345, y//2+50)
 
+    #text for bot playstyles
+    text_bot_normal, textpos_bot_normal = text(fortuner_font, 48, "Normal", (10, 10, 10), x//2-345, y//2+100)
+    text_bot_defensive, textpos_bot_defensive = text(fortuner_font, 48, "Defensiv", (10, 10, 10), x//2-345, y//2+100)
+    text_bot_offensive, textpos_bot_offensive = text(fortuner_font, 48, "Aggresiv", (10, 10, 10), x//2-345, y//2+100)
+    text_bot_random, textpos_bot_random = text(fortuner_font, 48, "Random", (10, 10, 10), x//2-345, y//2+100)
+
+    #background for bot playstyle
+    background_bot_style, background_bot_style_pos = button(300, 50, "lightgray", x//2-345, y//2+100)
+
+    #background for bot playstyles + and -
+
     #text for buy in
     text_poker_in, textpos_poker_in = text(fortuner_font, 50, "Köp in", (10, 10, 10), x//2, y//2)
 
@@ -303,6 +319,7 @@ def main():
 
             previous_state = start
             past_music = music
+        hover_any = False
 
         #handle if the x is pressed top left of the screen, and then closes it
         for event in events:
@@ -548,8 +565,8 @@ def main():
                 hover_logic(background_starting_exit_pos, background_starting_exit, "lightgray", "white")
                 hover_logic(button_starting_single_minus_pos, button_starting_single_minus, "lightgray", "white")
                 hover_logic(button_starting_single_plus_pos, button_starting_single_plus, "lightgray", "white")
-                hover_logic(background_starting_single_dif_plus_pos, background_starting_single_dif_plus, "lightgray", "white")
-                hover_logic(background_starting_single_dif_minus_pos, background_starting_single_dif_minus, "lightgray", "white")
+                hover_logic(background_starting_single_dif_plus_pos, background_starting_single_dif_plus, "darkred", "crimson")
+                hover_logic(background_starting_single_dif_minus_pos, background_starting_single_dif_minus, "chartreuse4", "chartreuse3")
                 hover_logic(background_fold_down_pos, background_fold_down, "lightgray", "white")
                 hover_logic(background_starting_start_pos, background_starting_start, "lightgray", "white")
                 hover_logic(background_starting_info_pos, background_starting_info, "lightgray", "white")
@@ -630,6 +647,15 @@ def main():
             screen.blit(background_starting_info, background_starting_info_pos)
             screen.blit(text_starting_info, textpos_starting_info)
             screen.blit(text_bot_style, textpos_bot_style)
+            screen.blit(background_bot_style, background_bot_style_pos)
+            if bot_type == 1:
+                screen.blit(text_bot_normal, textpos_bot_normal)
+            elif bot_type == 2:
+                screen.blit(text_bot_defensive, textpos_bot_defensive)
+            elif bot_type == 3:
+                screen.blit(text_bot_offensive, textpos_bot_offensive)
+            elif bot_type == 4:
+                screen.blit(text_bot_random, textpos_bot_random)
 
             #if info == True:
 
@@ -653,6 +679,9 @@ def main():
                     mode = "Seven-Card Stud"
                     print("Test3")
                     fold_poker = False
+
+                #if not click(background_fold_down1_pos) or not click(background_fold_down2_pos) or not click(background_fold_down3_pos):
+                #    fold_poker = False
 
                 
 
@@ -679,8 +708,8 @@ def main():
                 hover_logic(background_starting_exit_pos, background_starting_exit, "lightgray", "white")
                 hover_logic(button_starting_single_minus_pos, button_starting_single_minus, "lightgray", "white")
                 hover_logic(button_starting_single_plus_pos, button_starting_single_plus, "lightgray", "white")
-                hover_logic(background_starting_single_dif_plus_pos, background_starting_single_dif_plus, "lightgray", "white")
-                hover_logic(background_starting_single_dif_minus_pos, background_starting_single_dif_minus, "lightgray", "white")
+                hover_logic(background_starting_single_dif_plus_pos, background_starting_single_dif_plus, "darkred", "crimson")
+                hover_logic(background_starting_single_dif_minus_pos, background_starting_single_dif_minus, "chartreuse4", "chartreuse3")
                 hover_logic(background_fold_down_pos, background_fold_down, "lightgray", "white")
                 hover_logic(background_starting_start_pos, background_starting_start, "lightgray", "white")
                 hover_logic(background_starting_info_pos, background_starting_info, "lightgray", "white")
@@ -829,6 +858,11 @@ def main():
             screen.blit(text_starting_multi_development, textpos_starting_multi_development)
 
             pg.display.update()
+
+        if hover_any:
+            pg.mouse.set_cursor(pg.SYSTEM_CURSOR_HAND)
+        else:
+            pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)
 
         #frame rate
         clock.tick(60)
