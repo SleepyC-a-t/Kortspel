@@ -279,7 +279,13 @@ def main():
     #background for bot playstyle
     background_bot_style, background_bot_style_pos = button(300, 50, "lightgray", x//2-345, y//2+100)
 
-    #background for bot playstyles + and -
+    #background for bot playstyles left and right
+    background_bot_style_plus, background_bot_style_plus_pos = button(50, 50, "lightgray", x//2-170, y//2+100)
+    background_bot_style_minus, background_bot_style_minus_pos = button(50, 50, "lightgray", x//2-520, y//2+100)
+
+    #text for bot playstyle left and right
+    text_bot_style_plus, textpos_bot_style_plus = text(None, 48, ">", (10, 10, 10), x//2-170, y//2+100)
+    text_bot_style_minus, textpos_bot_style_minus = text(None, 48, "<", (10, 10, 10), x//2-520, y//2+100)
 
     #text for buy in
     text_poker_in, textpos_poker_in = text(fortuner_font, 50, "Köp in", (10, 10, 10), x//2, y//2)
@@ -572,6 +578,8 @@ def main():
                 hover_logic(background_fold_down_pos, background_fold_down, "lightgray", "white")
                 hover_logic(background_starting_start_pos, background_starting_start, "lightgray", "white")
                 hover_logic(background_starting_info_pos, background_starting_info, "lightgray", "white")
+                hover_logic(background_bot_style_minus_pos, background_bot_style_minus, "lightgray", "white")
+                hover_logic(background_bot_style_plus_pos, background_bot_style_plus, "lightgray", "white")
 
             if info != True:
 
@@ -587,6 +595,7 @@ def main():
                     print("Exit")
                     bot = 1
                     dif = 2
+                    bot_type = 1
                     start = "menu"
 
                 if click(background_starting_single_dif_minus_pos):
@@ -609,6 +618,13 @@ def main():
                 if click(background_starting_info_pos):
                     info = True
                     background_starting_info.fill("lightgray")
+
+                if click(background_bot_style_minus_pos):
+                    if bot_type >1:
+                        bot_type-=1
+                if click(background_bot_style_plus_pos):
+                    if bot_type <4:
+                        bot_type+=1
             
             #text for bot amount single
             if bot != bot1:
@@ -659,6 +675,10 @@ def main():
                 screen.blit(text_bot_offensive, textpos_bot_offensive)
             elif bot_type == 4:
                 screen.blit(text_bot_random, textpos_bot_random)
+            screen.blit(background_bot_style_minus, background_bot_style_minus_pos)
+            screen.blit(background_bot_style_plus, background_bot_style_plus_pos)
+            screen.blit(text_bot_style_minus, textpos_bot_style_minus)
+            screen.blit(text_bot_style_plus, textpos_bot_style_plus)
 
             #if info == True:
 
