@@ -16,6 +16,8 @@ def main():
     screen = pg.display.set_mode((x, y))
     #name for game window
     pg.display.set_caption('Kortspel')
+    icon = pg.image.load('icon.png')
+    pg.display.set_icon(icon)
 
     dragging = False
     volume = 1.0
@@ -606,6 +608,7 @@ def main():
 
                 if click(background_starting_info_pos):
                     info = True
+                    background_starting_info.fill("lightgray")
             
             #text for bot amount single
             if bot != bot1:
