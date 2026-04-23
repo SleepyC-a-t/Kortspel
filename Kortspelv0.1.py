@@ -32,7 +32,8 @@ def main():
     hover_any = False
     bot_type = 1
     previous_bot_type = 2
-    chips = 10000
+    chips = 100
+    chips1 = 0
     buy_chips = chips//20
     buy_chips1 = 0
 
@@ -303,6 +304,20 @@ def main():
     #text for + and - price
     text_poker_buy_plus, textpos_poker_buy_plus = text(fortuner_font, 48, "+", (10, 10, 10), x//2+520, y//2-30)
     text_poker_buy_minus, textpos_poker_buy_minus = text(fortuner_font, 48, "-", (10, 10, 10), x//2+170, y//2-30)
+
+    #text for chips amount
+    text_poker_chips_amount, textpos_poker_chips_amount = text(fortuner_font, 36, "Chips vid start", (10, 10, 10), x//2+345, y//2+50)
+
+    #background for chips + and -
+    background_chips_plus, background_chips_plus_pos = button(50, 50, "lightgray", x//2+520, y//2+100)
+    background_chips_minus, background_chips_minus_pos = button(50, 50, "lightgray", x//2+170, y//2+100)
+
+    #text for chips + and -
+    text_chips_plus, textpos_chips_plus = text(fortuner_font, 48, "+", (10, 10, 10), x//2+520, y//2+100)
+    text_chips_minus, textpos_chips_minus = text(fortuner_font, 48, "-", (10, 10, 10), x//2+170, y//2+100)
+
+    #background for chips buttons
+    background_chips_amount, background_chips_amount_pos = button(300, 50, "lightgray", x//2+345, y//2+100)
 
     #makes it so you can select frame rate (the speed that the code runs), is selected at the end of the game loop
     clock = pg.time.Clock()
@@ -596,6 +611,8 @@ def main():
                 hover_logic(background_bot_style_plus_pos, background_bot_style_plus, "lightgray", "white")
                 hover_logic(background_poker_buy_plus_pos, background_poker_buy_plus, "lightgray", "white")
                 hover_logic(background_poker_buy_minus_pos, background_poker_buy_minus, "lightgray", "white")
+                hover_logic(background_chips_plus_pos, background_chips_plus, "lightgray", "white")
+                hover_logic(background_chips_minus_pos, background_chips_minus, "lightgray", "white")
 
             if info != True:
 
@@ -613,6 +630,7 @@ def main():
                     dif = 2
                     bot_type = 1
                     buy_chips = chips//20
+                    chips = 100
                     start = "menu"
 
                 if click(background_starting_single_dif_minus_pos):
@@ -649,6 +667,15 @@ def main():
                 if click(background_poker_buy_plus_pos):
                     if buy_chips <chips//2:
                         buy_chips+=chips//100
+
+                if click(background_chips_minus_pos):
+                    if chips>100:
+                        chips-=100
+                        buy_chips = chips//20
+                if click(background_chips_plus_pos):
+                    if chips<10000:
+                        chips+=100
+                        buy_chips = chips//20
             
             #text for bot amount single
             if bot != bot1:
@@ -662,6 +689,10 @@ def main():
             if buy_chips != buy_chips1:
                 buy_chips1 = buy_chips
                 text_poker_chips, textpos_poker_chips = text(fortuner_font, 50, buy_chips, (10, 10, 10), x//2+345, y//2-30)
+
+            if chips != chips1:
+                chips1 = chips
+                text_poker_chipsnr, textpos_poker_chipsnr = text(fortuner_font, 50, chips, (10, 10, 10), x//2+345, y//2+100)
 
             screen.blit(background_menu, (0, 0))
             screen.blit(background_starting, background_starting_pos)
@@ -714,6 +745,13 @@ def main():
             screen.blit(text_poker_buy_minus, textpos_poker_buy_minus)
             screen.blit(text_poker_buy_plus, textpos_poker_buy_plus)
             screen.blit(text_poker_chips, textpos_poker_chips)
+            screen.blit(background_chips_amount, background_chips_amount_pos)
+            screen.blit(text_poker_chips_amount, textpos_poker_chips_amount)
+            screen.blit(text_poker_chipsnr, textpos_poker_chipsnr)
+            screen.blit(background_chips_plus, background_chips_plus_pos)
+            screen.blit(background_chips_minus, background_chips_minus_pos)
+            screen.blit(text_chips_plus, textpos_chips_plus)
+            screen.blit(text_chips_minus, textpos_chips_minus)
 
             #if info == True:
 
