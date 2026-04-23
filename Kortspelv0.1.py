@@ -293,6 +293,10 @@ def main():
     #background for buy in
     background_poker_buy, background_poker_buy_pos = button(300, 50, "lightgray", x//2+345, y//2-30)
 
+    #background for + and - price
+    background_poker_buy_plus, background_poker_buy_plus_pos = button(50, 50, "lightgray", x//2+520, y//2-30)
+    background_poker_buy_minus, background_poker_buy_minus_pos = button(50, 50, "lightgray", x//2-170, y//2-30)
+
     #makes it so you can select frame rate (the speed that the code runs), is selected at the end of the game loop
     clock = pg.time.Clock()
 
