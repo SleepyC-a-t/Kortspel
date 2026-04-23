@@ -288,7 +288,10 @@ def main():
     text_bot_style_minus, textpos_bot_style_minus = text(None, 48, "<", (10, 10, 10), x//2-520, y//2+100)
 
     #text for buy in
-    text_poker_in, textpos_poker_in = text(fortuner_font, 50, "Köp in", (10, 10, 10), x//2, y//2)
+    text_poker_in, textpos_poker_in = text(fortuner_font, 36, "Köp in", (10, 10, 10), x//2+345, y//2-80)
+
+    #background for buy in
+    background_poker_buy, background_poker_buy_pos = button(300, 50, "lightgray", x//2+345, y//2-30)
 
     #makes it so you can select frame rate (the speed that the code runs), is selected at the end of the game loop
     clock = pg.time.Clock()
@@ -679,6 +682,8 @@ def main():
             screen.blit(background_bot_style_plus, background_bot_style_plus_pos)
             screen.blit(text_bot_style_minus, textpos_bot_style_minus)
             screen.blit(text_bot_style_plus, textpos_bot_style_plus)
+            screen.blit(text_poker_in, textpos_poker_in)
+            screen.blit(background_poker_buy, background_poker_buy_pos)
 
             #if info == True:
 
@@ -702,11 +707,6 @@ def main():
                     mode = "Seven-Card Stud"
                     print("Test3")
                     fold_poker = False
-
-                #if not click(background_fold_down1_pos) or not click(background_fold_down2_pos) or not click(background_fold_down3_pos):
-                #    fold_poker = False
-
-                
 
                 screen.blit(background_fold_down1, background_fold_down1_pos)
                 screen.blit(background_fold_down2, background_fold_down2_pos)
