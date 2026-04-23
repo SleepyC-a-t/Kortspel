@@ -609,10 +609,10 @@ def main():
                 hover_logic(background_starting_info_pos, background_starting_info, "lightgray", "white")
                 hover_logic(background_bot_style_minus_pos, background_bot_style_minus, "lightgray", "white")
                 hover_logic(background_bot_style_plus_pos, background_bot_style_plus, "lightgray", "white")
-                hover_logic(background_poker_buy_plus_pos, background_poker_buy_plus, "lightgray", "white")
-                hover_logic(background_poker_buy_minus_pos, background_poker_buy_minus, "lightgray", "white")
-                hover_logic(background_chips_plus_pos, background_chips_plus, "lightgray", "white")
-                hover_logic(background_chips_minus_pos, background_chips_minus, "lightgray", "white")
+                hover_logic(background_poker_buy_plus_pos, background_poker_buy_plus, "chartreuse4", "chartreuse3")
+                hover_logic(background_poker_buy_minus_pos, background_poker_buy_minus, "darkred", "crimson")
+                hover_logic(background_chips_plus_pos, background_chips_plus, "chartreuse4", "chartreuse3")
+                hover_logic(background_chips_minus_pos, background_chips_minus, "darkred", "crimson")
 
             if info != True:
 
@@ -629,7 +629,7 @@ def main():
                     bot = 1
                     dif = 2
                     bot_type = 1
-                    buy_chips = chips//20
+                    buy_chips = 5
                     chips = 100
                     start = "menu"
 
