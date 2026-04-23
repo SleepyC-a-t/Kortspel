@@ -32,6 +32,9 @@ def main():
     hover_any = False
     bot_type = 1
     previous_bot_type = 2
+    chips = 10000
+    buy_chips = chips//20
+    buy_chips1 = 0
 
     #below is functions used in the code
     def hover_logic(background_pos, background, colour_before, colour_after):
@@ -295,7 +298,11 @@ def main():
 
     #background for + and - price
     background_poker_buy_plus, background_poker_buy_plus_pos = button(50, 50, "lightgray", x//2+520, y//2-30)
-    background_poker_buy_minus, background_poker_buy_minus_pos = button(50, 50, "lightgray", x//2-170, y//2-30)
+    background_poker_buy_minus, background_poker_buy_minus_pos = button(50, 50, "lightgray", x//2+170, y//2-30)
+
+    #text for + and - price
+    text_poker_buy_plus, textpos_poker_buy_plus = text(fortuner_font, 48, "+", (10, 10, 10), x//2+520, y//2-30)
+    text_poker_buy_minus, textpos_poker_buy_minus = text(fortuner_font, 48, "-", (10, 10, 10), x//2+170, y//2-30)
 
     #makes it so you can select frame rate (the speed that the code runs), is selected at the end of the game loop
     clock = pg.time.Clock()
@@ -587,6 +594,8 @@ def main():
                 hover_logic(background_starting_info_pos, background_starting_info, "lightgray", "white")
                 hover_logic(background_bot_style_minus_pos, background_bot_style_minus, "lightgray", "white")
                 hover_logic(background_bot_style_plus_pos, background_bot_style_plus, "lightgray", "white")
+                hover_logic(background_poker_buy_plus_pos, background_poker_buy_plus, "lightgray", "white")
+                hover_logic(background_poker_buy_minus_pos, background_poker_buy_minus, "lightgray", "white")
 
             if info != True:
 
@@ -603,6 +612,7 @@ def main():
                     bot = 1
                     dif = 2
                     bot_type = 1
+                    buy_chips = chips//20
                     start = "menu"
 
                 if click(background_starting_single_dif_minus_pos):
@@ -632,6 +642,13 @@ def main():
                 if click(background_bot_style_plus_pos):
                     if bot_type <4:
                         bot_type+=1
+
+                if click(background_poker_buy_minus_pos):
+                    if buy_chips >chips//100:
+                        buy_chips-=chips//100
+                if click(background_poker_buy_plus_pos):
+                    if buy_chips <chips//2:
+                        buy_chips+=chips//100
             
             #text for bot amount single
             if bot != bot1:
@@ -641,6 +658,10 @@ def main():
             if mode != mode1:
                 mode1 = mode
                 text_fold_down, textpos_fold_down = text(fortuner_font, 34, mode, (10, 10, 10), x//2, y//2-160)
+
+            if buy_chips != buy_chips1:
+                buy_chips1 = buy_chips
+                text_poker_chips, textpos_poker_chips = text(fortuner_font, 50, buy_chips, (10, 10, 10), x//2+345, y//2-30)
 
             screen.blit(background_menu, (0, 0))
             screen.blit(background_starting, background_starting_pos)
@@ -688,6 +709,11 @@ def main():
             screen.blit(text_bot_style_plus, textpos_bot_style_plus)
             screen.blit(text_poker_in, textpos_poker_in)
             screen.blit(background_poker_buy, background_poker_buy_pos)
+            screen.blit(background_poker_buy_minus, background_poker_buy_minus_pos)
+            screen.blit(background_poker_buy_plus, background_poker_buy_plus_pos)
+            screen.blit(text_poker_buy_minus, textpos_poker_buy_minus)
+            screen.blit(text_poker_buy_plus, textpos_poker_buy_plus)
+            screen.blit(text_poker_chips, textpos_poker_chips)
 
             #if info == True:
 
