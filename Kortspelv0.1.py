@@ -37,6 +37,7 @@ def main():
     chips1 = 0
     buy_chips = chips//20
     buy_chips1 = 0
+    chips_amount = buy_chips/chips
 
     #below is functions used in the code
     def hover_logic(background_pos:int, background:int, colour_before:str, colour_after:str):
@@ -701,6 +702,7 @@ def main():
                     bot_type = 1
                     buy_chips = 5
                     chips = 100
+                    chips_amount = buy_chips//chips
                     start = "menu"
 
                 if click(background_starting_single_dif_minus_pos):
@@ -732,20 +734,24 @@ def main():
                         bot_type+=1
 
                 if click(background_poker_buy_minus_pos):
-                    if buy_chips >chips//100:
-                        buy_chips-=chips//100
+                    if buy_chips >chips/100:
+                        buy_chips-=chips
+                        chips_amount = buy_chips//chips
                 if click(background_poker_buy_plus_pos):
                     if buy_chips <chips//2:
-                        buy_chips+=chips//100
+                        buy_chips+=chips/100
+                        chips_amount = buy_chips//chips
 
                 if click(background_chips_minus_pos):
                     if chips>100:
                         chips-=100
-                        buy_chips = chips//20
+                        #chips_amount = buy_chips//chips
+                        buy_chips = chips*chips_amount
                 if click(background_chips_plus_pos):
                     if chips<10000:
                         chips+=100
-                        buy_chips = chips//20
+                        #chips_amount = buy_chips//chips
+                        buy_chips = chips*chips_amount
             
             #text for bot amount single
             if bot != bot1:
