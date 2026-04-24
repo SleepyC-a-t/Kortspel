@@ -16,7 +16,7 @@ def main():
     screen = pg.display.set_mode((x, y))
     #name for game window
     pg.display.set_caption('Kortspel')
-    icon = pg.image.load('icon.png')
+    icon = pg.image.load('Graphics/icon.png')
     pg.display.set_icon(icon)
 
     dragging = False
@@ -74,8 +74,7 @@ def main():
             if event.type == pg. MOUSEBUTTONDOWN:
                 if surface.collidepoint(mouse_pos):
                     return True
-                else:
-                    return False
+            return False
     
     #main fonts
     fortuner_font = ('fortuner.otf')
@@ -84,6 +83,39 @@ def main():
 
     #background for main menu
     background_menu = pg.image.load('Graphics/Background_menu2.png')
+    background2_menu = pg.image.load('Graphics/Background2_menu2.png')
+    background3_menu = pg.image.load('Graphics/Background3_menu2.png')
+    background4_menu = pg.image.load('Graphics/Background4_menu2.png')
+
+    background = background_menu
+
+    #custom colours
+    COLORS = {
+        "teal": {
+            "base": pg.Color("#4FB3A5"),
+            "hover": pg.Color("#3E978B"),
+            "light": pg.Color("#6FCFC1")
+            #"dark": pg.Color("#3A6F68") old
+        }   ,
+        "purple": {
+            "base":pg.Color("#B39EB5"),
+            "hover":pg.Color("#9C86A0"),
+            "light":pg.Color("#D1BED3")
+            #"dark":pg.Color("#5F5560") old
+        }   ,
+        "gold": {
+            "base":pg.Color("#E6B85C"),
+            "hover":pg.Color("#C99E45"),
+            "light":pg.Color("#F2CF7A")
+            #"dark":pg.Color("#BFA48A") old
+        }   ,
+        "olive": {
+            "base":pg.Color("#AFCB6B"),
+            "hover":pg.Color("#95B553"),
+            "light":pg.Color("#C8DE8A")
+            #"dark":pg.Color("#6F7F5E") old
+        }
+    }
 
     #title background
     background_title, background_title_pos = button(500, 60, "dimgray", x//2, y//2-180)
@@ -319,6 +351,12 @@ def main():
     #background for chips buttons
     background_chips_amount, background_chips_amount_pos = button(300, 50, "lightgray", x//2+345, y//2+100)
 
+    #background for backgrounds for menu
+    background_baackground1, background_baackground1_pos = button(300, 175, "lightgray", x//2-275, y//2-100)
+    background_baackground2, background_baackground2_pos = button(300, 175, "lightgray", x//2+275, y//2-100)
+    background_baackground3, background_baackground3_pos = button(300, 175, "lightgray", x//2-275, y//2+20)
+    background_baackground4, background_baackground4_pos = button(300, 175, "lightgray", x//2+275, y//2+20)
+
     #makes it so you can select frame rate (the speed that the code runs), is selected at the end of the game loop
     clock = pg.time.Clock()
 
@@ -375,7 +413,7 @@ def main():
         #is in main menu
         if start == "menu":
             #draw main menu background background
-            screen.blit(background_menu, (0, 0))
+            screen.blit(background, (0, 0))
 
             hover_logic(background_start_pos, background_start, "dimgray", "lightgray")
             hover_logic(background_meny_pos, background_meny, "dimgray", "lightgray")
@@ -438,7 +476,7 @@ def main():
                         start = "menu"
                         break
 
-            screen.blit(background_menu, (0, 0))
+            screen.blit(background, (0, 0))
             screen.blit(background3, background3_pos)
             screen.blit(background_start_ensam, background_start_ensam_pos)
             screen.blit(background_start_fler, background_start_fler_pos)
@@ -451,7 +489,7 @@ def main():
 
         #selected button meny
         elif start == "options":
-            screen.blit(background_menu, (0, 0))
+            screen.blit(background, (0, 0))
             screen.blit(background3, background3_pos)
 
             hover_logic(background_menu_exit_pos, background_menu_exit, "lightgray", "white")
@@ -489,8 +527,8 @@ def main():
         elif start == "sound":
 
             hover_logic(background_menu_exit_pos, background_menu_exit, "lightgray", "white")
-            hover_logic(background_menu_sound1_pos, background_menu_sound1, "lightgray", "white")
-            hover_logic(background_menu_sound2_pos, background_menu_sound2, "lightgray", "white")
+            hover_logic(background_menu_sound1_pos, background_menu_sound1, COLORS["purple"]["base"], COLORS["purple"]["hover"])
+            hover_logic(background_menu_sound2_pos, background_menu_sound2, COLORS["olive"]["base"], COLORS["olive"]["hover"])
 
             if dragging == True:
                 # Move handle with mouse (but clamp to slider)
@@ -519,7 +557,7 @@ def main():
                         print("Musik 2")
                         music = "annoying"
 
-            screen.blit(background_menu, (0,0))
+            screen.blit(background, (0,0))
             screen.blit(background3, background3_pos)
             screen.blit(background_menu_exit, background_menu_exit_pos)
             screen.blit(text_start_exit, textpos_start_exit)
@@ -560,7 +598,7 @@ def main():
 
         #selected game mode is singleplayer
         elif start == "gamemode":
-            screen.blit(background_menu, (0, 0))
+            screen.blit(background, (0, 0))
             screen.blit(background3, background3_pos)
 
             hover_logic(background_menu_exit_pos, background_menu_exit, "lightgray", "white")
@@ -694,7 +732,7 @@ def main():
                 chips1 = chips
                 text_poker_chipsnr, textpos_poker_chipsnr = text(fortuner_font, 50, chips, (10, 10, 10), x//2+345, y//2+100)
 
-            screen.blit(background_menu, (0, 0))
+            screen.blit(background, (0, 0))
             screen.blit(background_starting, background_starting_pos)
             screen.blit(background_starting_exit, background_starting_exit_pos)
             screen.blit(text_starting_exit, textpos_starting_exit)
@@ -849,7 +887,7 @@ def main():
                 mode1 = mode
                 text_fold_down, textpos_fold_down = text(fortuner_font, 36, mode, (10, 10, 10), x//2, y//2-160)
 
-            screen.blit(background_menu, (0, 0))
+            screen.blit(background, (0, 0))
             screen.blit(background_starting, background_starting_pos)
             screen.blit(background_starting_exit, background_starting_exit_pos)
             screen.blit(text_starting_exit, textpos_starting_exit)
@@ -940,7 +978,7 @@ def main():
                 print("Exit")
                 start = "menu"
 
-            screen.blit(background_menu, (0, 0))
+            screen.blit(background, (0, 0))
             screen.blit(background_starting, background_starting_pos)
             screen.blit(background_starting_exit, background_starting_exit_pos)
             screen.blit(text_starting_exit, textpos_starting_exit)
