@@ -448,7 +448,7 @@ def main():
             screen.blit(background_exit, background_exit_pos)
             screen.blit(background_title, background_title_pos)
             screen.blit(text_titel, textpos_titel)
-
+        
             #draw text ON TOP of buttons
             #for the text to be visible, it needs to be blited on the screen AFTER the main button base was added
             screen.blit(text_start, textpos_start)
@@ -575,7 +575,6 @@ def main():
             screen.blit(background_menu_sound2, background_menu_sound2_pos)
             screen.blit(text_menu_sound1, textpos_menu_sound1)
             screen.blit(text_menu_sound2, textpos_menu_sound2)
-            
             pg.draw.rect(screen, "darkgray", slider_rect)
             pg.draw.rect(screen, "white", handle_rect)
 
@@ -735,22 +734,20 @@ def main():
 
                 if click(background_poker_buy_minus_pos):
                     if buy_chips >chips/100:
-                        buy_chips-=chips
-                        chips_amount = buy_chips//chips
+                        buy_chips-=chips/100
+                        chips_amount = buy_chips/chips
                 if click(background_poker_buy_plus_pos):
                     if buy_chips <chips//2:
                         buy_chips+=chips/100
-                        chips_amount = buy_chips//chips
+                        chips_amount = buy_chips/chips
 
                 if click(background_chips_minus_pos):
                     if chips>100:
                         chips-=100
-                        #chips_amount = buy_chips//chips
                         buy_chips = chips*chips_amount
                 if click(background_chips_plus_pos):
                     if chips<10000:
                         chips+=100
-                        #chips_amount = buy_chips//chips
                         buy_chips = chips*chips_amount
             
             #text for bot amount single
