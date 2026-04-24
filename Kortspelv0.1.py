@@ -39,7 +39,7 @@ def main():
     buy_chips1 = 0
 
     #below is functions used in the code
-    def hover_logic(background_pos, background, colour_before, colour_after):
+    def hover_logic(background_pos:int, background:int, colour_before:str, colour_after:str):
         """background position, background, colour without mouse, colour with mouse, returns background"""
         nonlocal hover_any
         
@@ -51,7 +51,7 @@ def main():
         
         return background
     
-    def button(width, height, colour, placementx, placementy):
+    def button(width:int, height:int, colour:str, placementx:int, placementy:int):
         """width, height, colour, x, y, returns surface and surface pos"""
         background = pg.Surface((width, height))
         background.fill(colour)
@@ -60,7 +60,7 @@ def main():
 
         return background, background_pos
     
-    def text(font, fontsize, message, colour, xpos, ypos):
+    def text(font:str, fontsize:int, message:str, colour:str, xpos:int, ypos:int):
         """font, size, message, colour (x, y, z), x, y, returns text and text pos"""
         message = str(message)
         textfont = pg.font.Font(font, fontsize)
@@ -69,7 +69,7 @@ def main():
         textpos.center = (xpos, ypos)
         return texti, textpos
     
-    def click(surface):
+    def click(surface:int):
         """surface (pos), returns true or false"""
         for event in events:
             if event.type == pg. MOUSEBUTTONDOWN:
@@ -599,6 +599,8 @@ def main():
                         print("Exit")
                         start = "menu"
                         break
+
+            #if click()
             
 
             screen.blit(background_menu, (0,0))
