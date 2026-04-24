@@ -600,10 +600,19 @@ def main():
                         start = "menu"
                         break
 
-            #if click()
-            
+            if click(background_background1_pos):
+                background = background_menu
+                
+            if click(background_background2_pos):
+                background = background2_menu
 
-            screen.blit(background_menu, (0,0))
+            if click(background_background3_pos):
+                background = background3_menu
+
+            if click(background_background4_pos):
+                background = background4_menu
+
+            screen.blit(background, (0,0))
             screen.blit(background3, background3_pos)
             screen.blit(background_menu_exit, background_menu_exit_pos)
             screen.blit(text_start_exit, textpos_start_exit)
