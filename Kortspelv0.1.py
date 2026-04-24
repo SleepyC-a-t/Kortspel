@@ -1,5 +1,6 @@
 import pygame as pg
 import random
+import json
 from sys import exit
 #loop needed to run
 def main():
@@ -457,6 +458,8 @@ def main():
 
             #update screen
             pg.display.update()
+
+        #selected button is account
 
         #selected button is the start button
         elif start == "start":
