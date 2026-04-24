@@ -584,10 +584,10 @@ def main():
         elif start == "image":
 
             hover_logic(background_menu_exit_pos, background_menu_exit, "lightgray", "white")
-            hover_logic(background_background1_pos, background_background1, "lightgray", "white")
-            hover_logic(background_background2_pos, background_background2, "lightgray", "white")
-            hover_logic(background_background3_pos, background_background3, "lightgray", "white")
-            hover_logic(background_background4_pos, background_background4, "lightgray", "white")
+            hover_logic(background_background1_pos, background_background1, COLORS["gold"]["base"], COLORS["gold"]["hover"])
+            hover_logic(background_background2_pos, background_background2, COLORS["purple"]["base"], COLORS["purple"]["hover"])
+            hover_logic(background_background3_pos, background_background3, COLORS["olive"]["base"], COLORS["olive"]["hover"])
+            hover_logic(background_background4_pos, background_background4, COLORS["teal"]["base"], COLORS["teal"]["hover"])
 
             for event in events:
                 if event.type == pg.MOUSEBUTTONDOWN:
