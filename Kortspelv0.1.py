@@ -77,7 +77,7 @@ def main():
             if event.type == pg. MOUSEBUTTONDOWN:
                 if surface.collidepoint(mouse_pos):
                     return True
-            return False
+        return False
     
     #main fonts
     fortuner_font = ('fortuner.otf')
@@ -120,6 +120,12 @@ def main():
             #"dark":pg.Color("#6F7F5E") old
         }
     }
+
+    #background for account button
+    background_account, background_account_pos = button(50, 40, "dimgray", x//2-110, y//2-80)
+
+    #texr for account button
+    text_account, textpos_account = text(fortuner_font, 36, "AC", (10, 10, 10), x//2-110, y//2-80)
 
     #title background
     background_title, background_title_pos = button(500, 60, "dimgray", x//2, y//2-180)
@@ -428,6 +434,7 @@ def main():
             hover_logic(background_start_pos, background_start, "dimgray", "lightgray")
             hover_logic(background_meny_pos, background_meny, "dimgray", "lightgray")
             hover_logic(background_exit_pos, background_exit, "dimgray", "lightgray")
+            hover_logic(background_account_pos, background_account, "dimgray", "lightgray")
 
             for event in events:
                 if event.type == pg.MOUSEBUTTONDOWN:
@@ -442,12 +449,17 @@ def main():
                     elif background_exit_pos.collidepoint(mouse_pos):
                         pg.quit()
                         exit()
+                
+            if click(background_account_pos):
+                start = "account"
+                
 
             #draw buttons
             screen.blit(background_start, background_start_pos)
             screen.blit(background_meny, background_meny_pos)
             screen.blit(background_exit, background_exit_pos)
             screen.blit(background_title, background_title_pos)
+            screen.blit(background_account, background_account_pos)
             screen.blit(text_titel, textpos_titel)
         
             #draw text ON TOP of buttons
@@ -455,11 +467,23 @@ def main():
             screen.blit(text_start, textpos_start)
             screen.blit(text_meny, textpos_meny)
             screen.blit(text_avsluta, textpos_avsluta)
+            screen.blit(text_account, textpos_account)
 
             #update screen
             pg.display.update()
 
         #selected button is account
+        elif start == "account":
+            hover_logic(background_start_exit_pos, background_start_exit, "lightgray", "white")
+
+            if click(background_start_exit_pos):
+                start = "menu"
+
+            screen.blit(background, (0,0))
+            screen.blit(background3, background3_pos)
+            screen.blit(background_start_exit, background_start_exit_pos)
+            screen.blit(text_start_exit, textpos_start_exit)
+            pg.display.update()
 
         #selected button is the start button
         elif start == "start":
