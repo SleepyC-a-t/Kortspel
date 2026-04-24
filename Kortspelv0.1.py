@@ -17,6 +17,7 @@ def main():
     #name for game window
     pg.display.set_caption('Kortspel')
     icon = pg.image.load('Graphics/icon.png')
+    
     pg.display.set_icon(icon)
 
     dragging = False
@@ -88,6 +89,7 @@ def main():
     background4_menu = pg.image.load('Graphics/Background4_menu2.png')
 
     background = background_menu
+    background1 = None
 
     #custom colours
     COLORS = {
@@ -352,10 +354,16 @@ def main():
     background_chips_amount, background_chips_amount_pos = button(300, 50, "lightgray", x//2+345, y//2+100)
 
     #background for backgrounds for menu
-    background_baackground1, background_baackground1_pos = button(300, 175, "lightgray", x//2-275, y//2-100)
-    background_baackground2, background_baackground2_pos = button(300, 175, "lightgray", x//2+275, y//2-100)
-    background_baackground3, background_baackground3_pos = button(300, 175, "lightgray", x//2-275, y//2+20)
-    background_baackground4, background_baackground4_pos = button(300, 175, "lightgray", x//2+275, y//2+20)
+    background_background1, background_background1_pos = button(300, 150, "lightgray", x//2-275, y//2-50)
+    background_background2, background_background2_pos = button(300, 150, "lightgray", x//2+275, y//2-50)
+    background_background3, background_background3_pos = button(300, 150, "lightgray", x//2-275, y//2+120)
+    background_background4, background_background4_pos = button(300, 159, "lightgray", x//2+275, y//2+120)
+
+    #text for background buttonx
+    text_background1, textpos_background1 = text(fortuner_font, 48, "Bild 1", (10, 10, 10), x//2-275, y//2-50)
+    text_background2, textpos_background2 = text(fortuner_font, 48, "Bild 2", (10, 10, 10), x//2+275, y//2-50)
+    text_background3, textpos_background3 = text(fortuner_font, 48, "Bild 3", (10, 10, 10), x//2-275, y//2+120)
+    text_background4, textpos_background4 = text(fortuner_font, 48, "Bild 4", (10, 10, 10), x//2+275, y//2+120)
 
     #makes it so you can select frame rate (the speed that the code runs), is selected at the end of the game loop
     clock = pg.time.Clock()
@@ -576,6 +584,10 @@ def main():
         elif start == "image":
 
             hover_logic(background_menu_exit_pos, background_menu_exit, "lightgray", "white")
+            hover_logic(background_background1_pos, background_background1, "lightgray", "white")
+            hover_logic(background_background2_pos, background_background2, "lightgray", "white")
+            hover_logic(background_background3_pos, background_background3, "lightgray", "white")
+            hover_logic(background_background4_pos, background_background4, "lightgray", "white")
 
             for event in events:
                 if event.type == pg.MOUSEBUTTONDOWN:
@@ -587,12 +599,21 @@ def main():
                         print("Exit")
                         start = "menu"
                         break
+            
 
             screen.blit(background_menu, (0,0))
             screen.blit(background3, background3_pos)
             screen.blit(background_menu_exit, background_menu_exit_pos)
             screen.blit(text_start_exit, textpos_start_exit)
             screen.blit(text_options_image, textpos_options_image)
+            screen.blit(background_background1, background_background1_pos)
+            screen.blit(background_background2, background_background2_pos)
+            screen.blit(background_background3, background_background3_pos)
+            screen.blit(background_background4, background_background4_pos)
+            screen.blit(text_background1, textpos_background1)
+            screen.blit(text_background2, textpos_background2)
+            screen.blit(text_background3, textpos_background3)
+            screen.blit(text_background4, textpos_background4)
 
             pg.display.update()
 
