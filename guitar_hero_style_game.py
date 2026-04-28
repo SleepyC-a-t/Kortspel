@@ -8,9 +8,10 @@ def main():
     x = 300
     y = 600
     falling = 0
-    frame = 120
-    falling_speed = 600
+    frame = 175
+    falling_speed = y*1.1
     music = 'Audio_Game'
+    timer = 221.0
     past_music = None
     volume = 0.2
     score = 0
@@ -48,7 +49,7 @@ def main():
             return True
         return False
 
-    def hit(Rectpos, secondrectpos, tolerance=35):
+    def hit(Rectpos, secondrectpos, tolerance=40):
         return abs(Rectpos.centery-secondrectpos.centery) <= tolerance
         
     def text(font, fontsize, message, colour, xpos, ypos):
@@ -71,9 +72,9 @@ def main():
     line1, line1pos = button(x//5, y, "white", x//2, y//2, 128)
     lineleft, lineleftpos = button(x//5, y, "white", x//2-x//6-x//20, y//2, 128)
     lineright, linerightpos = button(x//5, y, "white", x//2+x//6+x//20, y//2, 128)
-    scoring, scoringpos = button(x//5, y//40, "dimgray", x//2, y//2+y//3, 230)
-    scoringleft, scoringleftpos = button(x//5, y//40, "dimgray", x//2-x//6-x//20, y//2+y//3, 230)
-    scoringright, scoringrightpos = button(x//5, y//40, "dimgray", x//2+x//6+x//20, y//2+y//3, 230)
+    scoring, scoringpos = button(x//5, y//60, "dimgray", x//2, y//2+y//3, 230)
+    scoringleft, scoringleftpos = button(x//5, y//60, "dimgray", x//2-x//6-x//20, y//2+y//3, 230)
+    scoringright, scoringrightpos = button(x//5, y//60, "dimgray", x//2+x//6+x//20, y//2+y//3, 230)
     scroingleft_invis, scoringleftpos_invis = button(x//5, y//16, "dimgray", x//2-x//6-x//20, backgroundpos_leftbox.centery, 0)
     scroingcenter_invis, scoringcenterpos_invis = button(x//5, y//16, "dimgray", x//2, backgroundpos_box.centery, 0)
     scroingright_invis, scoringrightpos_invis = button(x//5, y//16, "dimgray", x//2+x//6+x//20, backgroundpos_rightbox.centery, 0)
@@ -81,6 +82,9 @@ def main():
     text_max, textpos_max = text(None, 30, "Max possible score", (10, 10, 10), x//2, y//2*0.2)
     text_actual, textpos_actual = text(None, 30, "Actual score", (10, 10, 10), x//2, y//2*0.4)
     text_highcombo, textpos_highcombo = text(None, 30, "Highest combo", (10, 10, 10), x//2, y*0.3)
+    background_box1, backgroundpos_box1 = button(x//6, y//24, "black", x//2, falling)
+    background_leftbox1, backgroundpos_leftbox1 = button(x//6, y//24, "black", x//2-x//6-x//20, 0-600)
+    background_rightbox1, backgroundpos_rightbox1 = button(x//6, y//24, "black", x//2+x//6+x//20, 0-600)
     
 
     MUSIC_END = pg.USEREVENT + 1
@@ -93,6 +97,8 @@ def main():
     clock = pg.time.Clock()
 
     while True:
+        
+        
         mouse_pos = pg.mouse.get_pos()
         events = pg.event.get()
         if music != past_music:
@@ -105,6 +111,10 @@ def main():
 
             pg.mixer.music.play(0)
         dt = clock.tick(frame) / 1000
+        timer -=dt
+
+        if timer != timer+frame:
+            time, timepos = text(None, 60, int(timer), (10, 10, 10), x//2, y*0.9)
         
         for event in events:
             if event.type == MUSIC_END:
@@ -153,6 +163,21 @@ def main():
                         else:
                             score-=1
                             combo = 0
+            
+            if hit(scoringrightpos_invis, scoringrightpos):
+                background_rightbox.fill("green")
+            else:
+                background_rightbox.fill("black")
+
+            if hit(scoringleftpos_invis, scoringleftpos):
+                background_leftbox.fill("green")
+            else:
+                background_leftbox.fill("black")
+
+            if hit(scoringcenterpos_invis, scoringpos):
+                background_box.fill("green")
+            else:
+                background_box.fill("black")
                         
         if score != scoreold:
             scoreold = score
@@ -181,6 +206,8 @@ def main():
             if combo > high_combo:
                 high_combo = combo
             
+            
+            
             screen.blit(background, (0,0))
             screen.blit(line1, line1pos)
             screen.blit(lineleft, lineleftpos)
@@ -196,25 +223,28 @@ def main():
             screen.blit(scroingcenter_invis, scoringcenterpos_invis)
             screen.blit(scroingright_invis, scoringrightpos_invis)
             screen.blit(text_currentcombo, textpos_currentcombo)
+            screen.blit(time, timepos)
 
             pg.display.update()
         elif song_finished == True:
 
             if final_check == True and score !=0:
                 grade = score/max_score
-                if grade >= 0.95:
+                if grade == 1:
+                    final_grade = "S+"
+                elif grade >= 0.95:
                     final_grade = "S"
-                elif grade >= 0.9:
-                    final_grade = "A"
                 elif grade >= 0.85:
-                    final_grade = "B"
-                elif grade >= 0.8:
-                    final_grade = "C"
+                    final_grade = "A"
                 elif grade >= 0.75:
-                    final_grade = "D"
-                elif grade >= 0.7:
-                    final_grade = "E"
+                    final_grade = "B"
                 elif grade >= 0.65:
+                    final_grade = "C"
+                elif grade >= 0.55:
+                    final_grade = "D"
+                elif grade >= 0.45:
+                    final_grade = "E"
+                elif grade >= 0.35:
                     final_grade = "F"
                 else:
                     final_grade = "F-"
@@ -224,7 +254,7 @@ def main():
                 textcombo, textcombopos = text(None, 60, high_combo, (10, 10, 10), x//2, y*0.35)
             elif score <= 0:
                 final_check = False
-                final_grade = "F-"
+                final_grade = "F-----"
                 gradefinal, gradefinalpos = text(None, 60, final_grade, (10, 10, 10), x//2, y//2)
                 scoreboxpos, scoreboxpos = text(None, 60, score, (10, 10, 10), x//2, y*0.25)
                 textcombo, textcombopos = text(None, 60, high_combo, (10, 10, 10), x//2, y*0.35)
