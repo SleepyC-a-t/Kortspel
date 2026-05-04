@@ -8,10 +8,10 @@ def main():
     x = 300
     y = 600
     falling = 0
-    frame = 175
+    frame = 120
     falling_speed = y*1.1
     music = 'Audio_Game'
-    timer = 221.0
+    timer = 220.0
     past_music = None
     volume = 0.2
     score = 0
@@ -136,32 +136,32 @@ def main():
                 if event.type == pg.KEYDOWN:
                     if event.key == pg.K_s:
                         if hit(scoringcenterpos_invis, scoringpos):
-                            score+=1
-                            max_score+=1
+                            score+=100
+                            max_score+=100
                             combo+=1
                             force(backgroundpos_box, 0-random.choice(distance))
                         else:
-                            score-=1
+                            score-=10
                             combo = 0
             
                     elif event.key == pg.K_a:
                         if hit(scoringleftpos_invis, scoringleftpos):
-                            score+=1
-                            max_score+=1
+                            score+=100
+                            max_score+=100
                             combo+=1
                             force(backgroundpos_leftbox, 0-random.choice(distance))
                         else:
-                            score-=1
+                            score-=10
                             combo = 0
         
                     elif event.key == pg.K_d:
                         if hit(scoringrightpos_invis, scoringrightpos):
-                            score+=1
-                            max_score+=1
+                            score+=100
+                            max_score+=100
                             combo+=1
                             force(backgroundpos_rightbox, 0-random.choice(distance))
                         else:
-                            score-=1
+                            score-=10
                             combo = 0
             
             if hit(scoringrightpos_invis, scoringrightpos):
@@ -181,7 +181,7 @@ def main():
                         
         if score != scoreold:
             scoreold = score
-            scorebox, scoreboxpos = text(None, 60, score, (10, 10, 10), x//2-x//3-x//15, y//2-y//3-y//8)
+            scorebox, scoreboxpos = text(None, 60, score, (10, 10, 10), x//2, y//2-y//3-y//8)
             text_currentcombo, textpos_currentcombo = text(None, 60, combo, (10, 10, 10), x//2+x//3+x//15, y//2-y//3-y//8)
         if max_score != maxi_score:
             maxi_score = max_score
@@ -191,16 +191,16 @@ def main():
             fall(backgroundpos_leftbox)
             fall(backgroundpos_rightbox)
             if back(backgroundpos_box, 0-random.choice(distance)):
-                score-=1
-                max_score+=1
+                #score-=1
+                max_score+=100
                 combo = 0
             if back(backgroundpos_leftbox, 0-random.choice(distance)):
-                score-=1
-                max_score+=1
+                #score-=1
+                max_score+=100
                 combo = 0
             if back(backgroundpos_rightbox, 0-random.choice(distance)):
-                score-=1
-                max_score+=1
+                #score-=1
+                max_score+=100
                 combo = 0
 
             if combo > high_combo:
