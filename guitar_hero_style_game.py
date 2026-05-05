@@ -9,7 +9,7 @@ def main():
     y = 600
     falling = 0
     frame = 120
-    falling_speed = y*2.2
+    falling_speed = y*1.1
     music = 'Audio_Game'
     timer = 220.0
     past_music = None

@@ -711,7 +711,7 @@ def main():
                 hover_logic(background_chips_plus_pos, background_chips_plus, "chartreuse4", "chartreuse3")
                 hover_logic(background_chips_minus_pos, background_chips_minus, "darkred", "crimson")
 
-            if info != True:
+            
 
                 if click(button_starting_single_minus_pos):
                     if bot > 1:
@@ -729,7 +729,7 @@ def main():
                     buy_chips = 5
                     chips = 100
                     chips_amount = buy_chips//chips
-                    start = "menu"
+                    start = "gamemode"
 
                 if click(background_starting_single_dif_minus_pos):
                     if dif >1:
