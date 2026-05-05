@@ -85,6 +85,9 @@ def main():
     background_box1, backgroundpos_box1 = button(x//6, y//24, "black", x//2, falling)
     background_leftbox1, backgroundpos_leftbox1 = button(x//6, y//24, "black", x//2-x//6-x//20, 0-600)
     background_rightbox1, backgroundpos_rightbox1 = button(x//6, y//24, "black", x//2+x//6+x//20, 0-600)
+    text_left, textpos_left = text(None, 30, "D", (10, 10, 10), x//2-x//6-x//20, y//2+y//3)
+    text_center, textpos_center = text(None, 30, "F", (10, 10, 10), x//2, y//2+y//3)
+    text_right, textpos_right = text(None, 30, "J", (10, 10, 10), x//2+x//6+x//20, y//2+y//3)
     
 
     MUSIC_END = pg.USEREVENT + 1
@@ -134,7 +137,7 @@ def main():
         if song_finished == False:
             for event in events:
                 if event.type == pg.KEYDOWN:
-                    if event.key == pg.K_s:
+                    if event.key == pg.K_f:
                         if hit(scoringcenterpos_invis, scoringpos):
                             score+=100
                             max_score+=100
@@ -144,7 +147,7 @@ def main():
                             score-=10
                             combo = 0
             
-                    elif event.key == pg.K_a:
+                    elif event.key == pg.K_d:
                         if hit(scoringleftpos_invis, scoringleftpos):
                             score+=100
                             max_score+=100
@@ -154,7 +157,7 @@ def main():
                             score-=10
                             combo = 0
         
-                    elif event.key == pg.K_d:
+                    elif event.key == pg.K_j:
                         if hit(scoringrightpos_invis, scoringrightpos):
                             score+=100
                             max_score+=100
@@ -224,6 +227,9 @@ def main():
             screen.blit(scroingright_invis, scoringrightpos_invis)
             screen.blit(text_currentcombo, textpos_currentcombo)
             screen.blit(time, timepos)
+            screen.blit(text_left, textpos_left)
+            screen.blit(text_center, textpos_center)
+            screen.blit(text_right, textpos_right)
 
             pg.display.update()
         elif song_finished == True:
