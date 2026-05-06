@@ -8,8 +8,8 @@ def main():
     x = 300
     y = 600
     falling = 0
-    frame = 120
-    falling_speed = y*1.1
+    frame = 60
+    falling_speed = y*1
     music = 'Audio_Game'
     timer = 220.0
     past_music = None
@@ -49,7 +49,7 @@ def main():
             return True
         return False
 
-    def hit(Rectpos, secondrectpos, tolerance=40):
+    def hit(Rectpos, secondrectpos, tolerance=35):
         return abs(Rectpos.centery-secondrectpos.centery) <= tolerance
         
     def text(font, fontsize, message, colour, xpos, ypos):
@@ -88,7 +88,12 @@ def main():
     text_left, textpos_left = text(None, 30, "D", (10, 10, 10), x//2-x//6-x//20, y//2+y//3)
     text_center, textpos_center = text(None, 30, "F", (10, 10, 10), x//2, y//2+y//3)
     text_right, textpos_right = text(None, 30, "J", (10, 10, 10), x//2+x//6+x//20, y//2+y//3)
-    
+    line_left, linepos_left = button(x//7, y, "white", x//2-x//6-x//20-x//6-x//40, y//2, 128)
+    line_right, linepos_right = button(x//7, y, "white", x//2+x//6+x//20+x//6+x//40, y//2, 128)
+    scoring_left, scoringpos_left = button(x//7, y//60, "dimgray", x//2-x//6-x//20-x//6-x//40, y//2+y//3, 230)
+    scoring_right, scoringpos_right = button(x//7, y//60, "dimgray", x//2+x//6+x//20+x//6+x//40, y//2+y//3, 230)
+    fallingbox_left, fallingboxpos_left = button(x//8, y//24, "black", x//2-x//6-x//20-x//6-x//40, falling)
+    fallingbox_right, fallingboxpos_right = button(x//8, y//24, "black", x//2+x//6+x//20+x//6+x//40, falling)
 
     MUSIC_END = pg.USEREVENT + 1
     pg.mixer.music.set_endevent(MUSIC_END)
@@ -147,7 +152,7 @@ def main():
                             score-=10
                             combo = 0
             
-                    elif event.key == pg.K_d:
+                    elif event.key == pg.K_d or event.key== pg.K_w:
                         if hit(scoringleftpos_invis, scoringleftpos):
                             score+=100
                             max_score+=100
@@ -166,6 +171,26 @@ def main():
                         else:
                             score-=10
                             combo = 0
+                    
+                    elif event.key == pg.K_LSHIFT:
+                        if hit(fallingboxpos_left, scoringpos_left):
+                            score+=100
+                            max_score+=100
+                            combo+=1
+                            force(fallingboxpos_left, 0-random.choice(distance))
+                        else:
+                            score-=10
+                            combo = 0
+
+                    elif event.key == pg.K_RSHIFT:
+                        if hit(fallingboxpos_right, scoringpos_right):
+                            score+=100
+                            max_score+=100
+                            combo+=1
+                            force(fallingboxpos_right, 0-random.choice(distance))
+                        else:
+                            score-=10
+                            combo = 0
             
             if hit(scoringrightpos_invis, scoringrightpos):
                 background_rightbox.fill("green")
@@ -181,6 +206,16 @@ def main():
                 background_box.fill("green")
             else:
                 background_box.fill("black")
+            
+            if hit(fallingboxpos_left, scoringpos_left):
+                fallingbox_left.fill("green")
+            else:
+                fallingbox_left.fill("black")
+
+            if hit(fallingboxpos_right, scoringpos_right):
+                fallingbox_right.fill("green")
+            else:
+                fallingbox_right.fill("black")
                         
         if score != scoreold:
             scoreold = score
@@ -193,6 +228,8 @@ def main():
             fall(backgroundpos_box)
             fall(backgroundpos_leftbox)
             fall(backgroundpos_rightbox)
+            fall(fallingboxpos_left)
+            fall(fallingboxpos_right)
             if back(backgroundpos_box, 0-random.choice(distance)):
                 #score-=1
                 max_score+=100
@@ -202,6 +239,14 @@ def main():
                 max_score+=100
                 combo = 0
             if back(backgroundpos_rightbox, 0-random.choice(distance)):
+                #score-=1
+                max_score+=100
+                combo = 0
+            if back(fallingboxpos_right, 0-random.choice(distance)):
+                #score-=1
+                max_score+=100
+                combo = 0
+            if back(fallingboxpos_left, 0-random.choice(distance)):
                 #score-=1
                 max_score+=100
                 combo = 0
@@ -225,11 +270,19 @@ def main():
             screen.blit(scroingleft_invis, scoringleftpos_invis)
             screen.blit(scroingcenter_invis, scoringcenterpos_invis)
             screen.blit(scroingright_invis, scoringrightpos_invis)
-            screen.blit(text_currentcombo, textpos_currentcombo)
+            
             screen.blit(time, timepos)
             screen.blit(text_left, textpos_left)
             screen.blit(text_center, textpos_center)
             screen.blit(text_right, textpos_right)
+            screen.blit(line_right, linepos_right)
+            screen.blit(line_left, linepos_left)
+            screen.blit(scoring_left, scoringpos_left)
+            screen.blit(scoring_right, scoringpos_right)
+            screen.blit(fallingbox_right, fallingboxpos_right)
+            screen.blit(fallingbox_left, fallingboxpos_left)
+
+            screen.blit(text_currentcombo, textpos_currentcombo)
 
             pg.display.update()
         elif song_finished == True:
@@ -238,19 +291,19 @@ def main():
                 grade = score/max_score
                 if grade == 1:
                     final_grade = "S+"
-                elif grade >= 0.95:
+                elif grade >= 0.98:
                     final_grade = "S"
-                elif grade >= 0.85:
+                elif grade >= 0.94:
                     final_grade = "A"
-                elif grade >= 0.75:
+                elif grade >= 0.9:
                     final_grade = "B"
-                elif grade >= 0.65:
+                elif grade >= 0.86:
                     final_grade = "C"
-                elif grade >= 0.55:
+                elif grade >= 0.82:
                     final_grade = "D"
-                elif grade >= 0.45:
+                elif grade >= 0.78:
                     final_grade = "E"
-                elif grade >= 0.35:
+                elif grade >= 0.7:
                     final_grade = "F"
                 else:
                     final_grade = "F-"
