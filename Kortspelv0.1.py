@@ -79,8 +79,13 @@ def main():
                     return True
         return False
     
-    def give(take, give):
-        random.shuffle(take)
+    def give(take, give, amount:int):
+        x=0
+        while x<amount:
+            random.shuffle(take)
+            give.append(take[-1])
+            take.pop()
+            x+=1
 
 
     #main fonts
@@ -418,7 +423,7 @@ def main():
     Diamond_King = pg.image.load('Graphics/Cards/spaderK.png')
 
     #list in dictionary form for ALL cards
-    cards = {
+    cards = [
         #spade ace
         {'value': 13, 'suit': 'spade', 'graphics': Spade_Ace, 'show_player': False, 'in_deck': True},
         #spade 2
@@ -492,7 +497,7 @@ def main():
 
         #diamond King
         {'value': 12, 'suit': 'club', 'graphics': Diamond_King, 'show_player': False, 'in_deck': True}
-    }
+]
 
 
     #makes it so you can select frame rate (the speed that the code runs), is selected at the end of the game loop
