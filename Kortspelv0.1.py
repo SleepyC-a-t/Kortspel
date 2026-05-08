@@ -373,6 +373,9 @@ def main():
     text_background3, textpos_background3 = text(fortuner_font, 48, "Bild 3", (10, 10, 10), x//2-275, y//2+120)
     text_background4, textpos_background4 = text(fortuner_font, 48, "Bild 4", (10, 10, 10), x//2+275, y//2+120)
 
+    #background for poker game
+    Background_poker = pg.image.load('Graphics/Background_poker_table')
+
     #makes it so you can select frame rate (the speed that the code runs), is selected at the end of the game loop
     clock = pg.time.Clock()
 
@@ -747,6 +750,7 @@ def main():
 
                 if click(background_starting_start_pos):
                     print("Start")
+                    start = "poker_singleplayer"
 
                 if click(background_starting_info_pos):
                     info = True
@@ -1050,6 +1054,12 @@ def main():
 
             pg.display.update()
 
+        elif start == "poker_singleplayer":
+
+
+            screen.blit(Background_poker, (0,0))
+            pg.display.update()
+
         if hover_any:
             pg.mouse.set_cursor(pg.SYSTEM_CURSOR_HAND)
         else:
@@ -1060,10 +1070,7 @@ def main():
 
 if __name__ == '__main__' : main()
 
-<<<<<<< patch-1
 #HEJ 
-=======
 
 
 
->>>>>>> main
