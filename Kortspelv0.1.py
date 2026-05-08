@@ -79,6 +79,10 @@ def main():
                     return True
         return False
     
+    def give(take, give):
+        random.shuffle(take)
+
+
     #main fonts
     fortuner_font = ('fortuner.otf')
     
@@ -404,6 +408,92 @@ def main():
     Club_Jack = pg.image.load('Graphics/Cards/klöverJ.png')
     Club_Queen = 1
     Club_King = pg.image.load('Graphics/Cards/klöverK.png')
+
+    Heart_Ace = 1
+    Heart_Jack = pg.image.load('Graphics/Cards/hjärterJ.png')
+    Heart_King = pg.image.load('Graphics/Cards/hjärterK.png')
+
+    Diamond_Ace = 1
+    Diamond_Jack = pg.image.load('Graphics/Cards/spaderJ.png')
+    Diamond_King = pg.image.load('Graphics/Cards/spaderK.png')
+
+    #list in dictionary form for ALL cards
+    cards = {
+        #spade ace
+        {'value': 13, 'suit': 'spade', 'graphics': Spade_Ace, 'show_player': False, 'in_deck': True},
+        #spade 2
+        {'value': 1, 'suit': 'spade', 'graphics': Spade_Two, 'show_player': False, 'in_deck': True},
+        #spade 3
+        {'value': 2, 'suit': 'spade', 'graphics': Spade_Three, 'show_player': False, 'in_deck': True},
+        #spade 4
+        {'value': 3, 'suit': 'spade', 'graphics': Spade_Four, 'show_player': False, 'in_deck': True},
+        #spade 5
+        {'value': 4, 'suit': 'spade', 'graphics': Spade_Five, 'show_player': False, 'in_deck': True},
+        #spade 6
+        {'value': 5, 'suit': 'spade', 'graphics': Spade_Six, 'show_player': False, 'in_deck': True},
+        #spade 7
+        {'value': 6, 'suit': 'spade', 'graphics': Spade_Seven, 'show_player': False, 'in_deck': True},
+        #spade 8
+        {'value': 7, 'suit': 'spade', 'graphics': Spade_Eight, 'show_player': False, 'in_deck': True},
+        #spade 9
+        {'value': 8, 'suit': 'spade', 'graphics': Spade_Nine, 'show_player': False, 'in_deck': True},
+        #spade 10
+        {'value': 9, 'suit': 'spade', 'graphics': Spade_Ten, 'show_player': False, 'in_deck': True},
+        #spade Jack
+        {'value': 10, 'suit': 'spade', 'graphics': Spade_Jack, 'show_player': False, 'in_deck': True},
+        #spade Queen
+
+        #spade King
+        {'value': 12, 'suit': 'spade', 'graphics': Spade_King, 'show_player': False, 'in_deck': True},
+
+        #club Ace
+        {'value': 13, 'suit': 'club', 'graphics': Club_Ace, 'show_player': False, 'in_deck': True},
+        #club 2
+        {'value': 1, 'suit': 'club', 'graphics': Club_Two, 'show_player': False, 'in_deck': True},
+        #club 3
+        {'value': 2, 'suit': 'club', 'graphics': Club_Three, 'show_player': False, 'in_deck': True},
+        #club 4
+        {'value': 3, 'suit': 'club', 'graphics': Club_Four, 'show_player': False, 'in_deck': True},
+        #club 5
+        {'value': 4, 'suit': 'club', 'graphics': Club_Five, 'show_player': False, 'in_deck': True},
+        #club 6
+        {'value': 5, 'suit': 'club', 'graphics': Club_Six, 'show_player': False, 'in_deck': True},
+        #club 7
+        {'value': 6, 'suit': 'club', 'graphics': Club_Seven, 'show_player': False, 'in_deck': True},
+        #club 8
+        {'value': 7, 'suit': 'club', 'graphics': Club_Eight, 'show_player': False, 'in_deck': True},
+        #club 9
+        {'value': 8, 'suit': 'club', 'graphics': Club_Nine, 'show_player': False, 'in_deck': True},
+        #club 10
+        {'value': 9, 'suit': 'club', 'graphics': Club_Ten, 'show_player': False, 'in_deck': True},
+        #club Jack
+        {'value': 10, 'suit': 'club', 'graphics': Club_Jack, 'show_player': False, 'in_deck': True},
+        #club Queen
+
+        #club King
+        {'value': 12, 'suit': 'club', 'graphics': Club_King, 'show_player': False, 'in_deck': True},
+
+
+        #heart Ace
+
+        #heart Jack
+        {'value': 10, 'suit': 'heart', 'graphics': Heart_Jack, 'show_player': False, 'in_deck': True},
+        #heart Queen
+
+        #heart King
+        {'value': 12, 'suit': 'club', 'graphics': Heart_King, 'show_player': False, 'in_deck': True},
+
+
+        #diamond Ace
+
+        #diamond Jack
+        {'value': 10, 'suit': 'club', 'graphics': Diamond_Jack, 'show_player': False, 'in_deck': True},
+        #diamond Queen
+
+        #diamond King
+        {'value': 12, 'suit': 'club', 'graphics': Diamond_King, 'show_player': False, 'in_deck': True}
+    }
+
 
     #makes it so you can select frame rate (the speed that the code runs), is selected at the end of the game loop
     clock = pg.time.Clock()
@@ -1098,8 +1188,4 @@ def main():
         clock.tick(60)
 
 if __name__ == '__main__' : main()
-
-#HEJ 
-
-
 

@@ -18,7 +18,7 @@ def main():
     max_score = 0
     scoreold = None
     maxi_score = None
-    distance = [100, 200, 300, 400, 500, 600]
+    distance = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400]
     final_check = True
     combo = 0
     high_combo = 0
