@@ -374,7 +374,36 @@ def main():
     text_background4, textpos_background4 = text(fortuner_font, 48, "Bild 4", (10, 10, 10), x//2+275, y//2+120)
 
     #background for poker game
-    Background_poker = pg.image.load('Graphics/Background_poker_table')
+    Background_poker = pg.image.load('Graphics/Poker_Table.png')
+
+    #ALL THE CARDS
+    Spade_Ace = 1
+    Spade_Two = pg.image.load('Graphics/Cards/spader2.png')
+    Spade_Three = pg.image.load('Graphics/Cards/spader3.png')
+    Spade_Four = pg.image.load('Graphics/Cards/spader4.png')
+    Spade_Five = pg.image.load('Graphics/Cards/spader5.png')
+    Spade_Six = pg.image.load('Graphics/Cards/spader6.png')
+    Spade_Seven = pg.image.load('Graphics/Cards/spader7.png')
+    Spade_Eight = pg.image.load('Graphics/Cards/spader8.png')
+    Spade_Nine = pg.image.load('Graphics/Cards/spader9.png')
+    Spade_Ten = pg.image.load('Graphics/Cards/spader10.png')
+    Spade_Jack = pg.image.load('Graphics/Cards/spaderJ.png')
+    Spade_Queen = 1
+    Spade_King = pg.image.load('Graphics/Cards/spaderK.png')
+
+    Club_Ace = 1
+    Club_Two =pg.image.load('Graphics/Cards/klöver2.png')
+    Club_Three = pg.image.load('Graphics/Cards/klöver3.png')
+    Club_Four = pg.image.load('Graphics/Cards/klöver4.png')
+    Club_Five = pg.image.load('Graphics/Cards/klöver5.png')
+    Club_Six = pg.image.load('Graphics/Cards/klöver6.png')
+    Club_Seven = pg.image.load('Graphics/Cards/klöver7.png')
+    Club_Eight = pg.image.load('Graphics/Cards/klöver8.png')
+    Club_Nine = pg.image.load('Graphics/Cards/klöver9.png')
+    Club_Ten = pg.image.load('Graphics/Cards/klöver10.png')
+    Club_Jack = pg.image.load('Graphics/Cards/klöverJ.png')
+    Club_Queen = 1
+    Club_King = pg.image.load('Graphics/Cards/klöverK.png')
 
     #makes it so you can select frame rate (the speed that the code runs), is selected at the end of the game loop
     clock = pg.time.Clock()
