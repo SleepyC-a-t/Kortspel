@@ -16,7 +16,7 @@ def main():
     #defines screen
     screen = pg.display.set_mode((x, y))
     #name for game window
-    pg.display.set_caption('Kortspel')
+    pg.display.set_caption('DUK')
     icon = pg.image.load('Graphics/icon.png')
     
     pg.display.set_icon(icon)
@@ -39,6 +39,13 @@ def main():
     buy_chips = chips//20
     buy_chips1 = 0
     chips_amount = buy_chips/chips
+    table_cards = []
+    past_table = False
+    time = 0
+    time1 = True
+    card_hover = False
+    pos4 = 0
+    pos5 = 0
 
     #below is functions used in the code
     def hover_logic(background_pos:int, background:int, colour_before:str, colour_after:str):
@@ -52,6 +59,20 @@ def main():
             background.fill(colour_before)
         
         return background
+    
+    def hover(surface_pos):
+        if surface_pos == list:
+            for surface in surface_pos:
+                if surface.collidepoint(mouse_pos):
+                    return True
+                else:
+                    return False
+            
+        else:
+            if surface_pos.collidepoint(mouse_pos):
+                return True
+            else:
+                return False
     
     def button(width:int, height:int, colour:str, placementx:int, placementy:int):
         """width, height, colour, x, y, returns surface and surface pos"""
@@ -79,13 +100,20 @@ def main():
                     return True
         return False
     
-    def give(take, give, amount:int):
+    def give(take, give, amount=1):
         x=0
         while x<amount:
             random.shuffle(take)
-            give.append(take[-1])
-            take.pop()
+            give.append(take.pop())
             x+=1
+
+    def poker_bot(dif:int, type:int, gamemode:str,turn=False, game_start=True, table_list=""):
+        if game_start == True:
+            bot_hand = []
+            give(cards, bot_hand, 2)
+            game_start = False
+        if turn == True:
+            print("turn")
 
 
     #main fonts
@@ -137,7 +165,7 @@ def main():
     text_account, textpos_account = text(fortuner_font, 36, "AC", (10, 10, 10), x//2-110, y//2-80)
 
     #title background
-    background_title, background_title_pos = button(500, 60, "dimgray", x//2, y//2-180)
+    background_title, background_title_pos = button(1000, 60, "dimgray", x//2, y//2-180)
 
     #start button background
     background_start, background_start_pos = button(130, 40, "dimgray", x//2, y//2-80)
@@ -149,7 +177,7 @@ def main():
     background_exit, background_exit_pos = button(160, 40, "dimgray", x//2, y//2+80)
 
     #text for title
-    text_titel, textpos_titel = text(fortuner_font, 60, "Vändtia och mer!", (10, 10, 10), x//2, y//2-180)
+    text_titel, textpos_titel = text(fortuner_font, 60, "Den Ultimataste Kortupplevelsen", (10, 10, 10), x//2, y//2-180)
 
     #text for start button
     text_start, textpos_start = text(fortuner_font, 40, "Start", (10, 10, 10), x//2, y//2-80)
@@ -401,7 +429,7 @@ def main():
     Spade_King = pg.image.load('Graphics/Cards/spaderK.png')
 
     Club_Ace = 1
-    Club_Two =pg.image.load('Graphics/Cards/klöver2.png')
+    Club_Two = pg.image.load('Graphics/Cards/klöver2.png')
     Club_Three = pg.image.load('Graphics/Cards/klöver3.png')
     Club_Four = pg.image.load('Graphics/Cards/klöver4.png')
     Club_Five = pg.image.load('Graphics/Cards/klöver5.png')
@@ -419,84 +447,84 @@ def main():
     Heart_King = pg.image.load('Graphics/Cards/hjärterK.png')
 
     Diamond_Ace = 1
-    Diamond_Jack = pg.image.load('Graphics/Cards/spaderJ.png')
-    Diamond_King = pg.image.load('Graphics/Cards/spaderK.png')
+    Diamond_Jack = pg.image.load('Graphics/Cards/ruterJ.png')
+    Diamond_King = pg.image.load('Graphics/Cards/ruterK.png')
 
     #list in dictionary form for ALL cards
     cards = [
         #spade ace
-        {'value': 13, 'suit': 'spade', 'graphics': Spade_Ace, 'show_player': False, 'in_deck': True},
+        #{'value': 13, 'suit': 'spade', 'graphics': Spade_Ace, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #spade 2
-        {'value': 1, 'suit': 'spade', 'graphics': Spade_Two, 'show_player': False, 'in_deck': True},
+        {'value': 1, 'suit': 'spade', 'graphics': Spade_Two, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #spade 3
-        {'value': 2, 'suit': 'spade', 'graphics': Spade_Three, 'show_player': False, 'in_deck': True},
+        {'value': 2, 'suit': 'spade', 'graphics': Spade_Three, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #spade 4
-        {'value': 3, 'suit': 'spade', 'graphics': Spade_Four, 'show_player': False, 'in_deck': True},
+        {'value': 3, 'suit': 'spade', 'graphics': Spade_Four, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #spade 5
-        {'value': 4, 'suit': 'spade', 'graphics': Spade_Five, 'show_player': False, 'in_deck': True},
+        {'value': 4, 'suit': 'spade', 'graphics': Spade_Five, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #spade 6
-        {'value': 5, 'suit': 'spade', 'graphics': Spade_Six, 'show_player': False, 'in_deck': True},
+        {'value': 5, 'suit': 'spade', 'graphics': Spade_Six, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #spade 7
-        {'value': 6, 'suit': 'spade', 'graphics': Spade_Seven, 'show_player': False, 'in_deck': True},
+        {'value': 6, 'suit': 'spade', 'graphics': Spade_Seven, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #spade 8
-        {'value': 7, 'suit': 'spade', 'graphics': Spade_Eight, 'show_player': False, 'in_deck': True},
+        {'value': 7, 'suit': 'spade', 'graphics': Spade_Eight, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #spade 9
-        {'value': 8, 'suit': 'spade', 'graphics': Spade_Nine, 'show_player': False, 'in_deck': True},
+        {'value': 8, 'suit': 'spade', 'graphics': Spade_Nine, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #spade 10
-        {'value': 9, 'suit': 'spade', 'graphics': Spade_Ten, 'show_player': False, 'in_deck': True},
+        {'value': 9, 'suit': 'spade', 'graphics': Spade_Ten, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #spade Jack
-        {'value': 10, 'suit': 'spade', 'graphics': Spade_Jack, 'show_player': False, 'in_deck': True},
+        {'value': 10, 'suit': 'spade', 'graphics': Spade_Jack, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #spade Queen
 
         #spade King
-        {'value': 12, 'suit': 'spade', 'graphics': Spade_King, 'show_player': False, 'in_deck': True},
+        {'value': 12, 'suit': 'spade', 'graphics': Spade_King, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
 
         #club Ace
-        {'value': 13, 'suit': 'club', 'graphics': Club_Ace, 'show_player': False, 'in_deck': True},
+        #{'value': 13, 'suit': 'club', 'graphics': Club_Ace, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #club 2
-        {'value': 1, 'suit': 'club', 'graphics': Club_Two, 'show_player': False, 'in_deck': True},
+        {'value': 1, 'suit': 'club', 'graphics': Club_Two, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #club 3
-        {'value': 2, 'suit': 'club', 'graphics': Club_Three, 'show_player': False, 'in_deck': True},
+        {'value': 2, 'suit': 'club', 'graphics': Club_Three, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #club 4
-        {'value': 3, 'suit': 'club', 'graphics': Club_Four, 'show_player': False, 'in_deck': True},
+        {'value': 3, 'suit': 'club', 'graphics': Club_Four, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #club 5
-        {'value': 4, 'suit': 'club', 'graphics': Club_Five, 'show_player': False, 'in_deck': True},
+        {'value': 4, 'suit': 'club', 'graphics': Club_Five, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #club 6
-        {'value': 5, 'suit': 'club', 'graphics': Club_Six, 'show_player': False, 'in_deck': True},
+        {'value': 5, 'suit': 'club', 'graphics': Club_Six, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #club 7
-        {'value': 6, 'suit': 'club', 'graphics': Club_Seven, 'show_player': False, 'in_deck': True},
+        {'value': 6, 'suit': 'club', 'graphics': Club_Seven, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #club 8
-        {'value': 7, 'suit': 'club', 'graphics': Club_Eight, 'show_player': False, 'in_deck': True},
+        {'value': 7, 'suit': 'club', 'graphics': Club_Eight, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #club 9
-        {'value': 8, 'suit': 'club', 'graphics': Club_Nine, 'show_player': False, 'in_deck': True},
+        {'value': 8, 'suit': 'club', 'graphics': Club_Nine, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #club 10
-        {'value': 9, 'suit': 'club', 'graphics': Club_Ten, 'show_player': False, 'in_deck': True},
+        {'value': 9, 'suit': 'club', 'graphics': Club_Ten, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #club Jack
-        {'value': 10, 'suit': 'club', 'graphics': Club_Jack, 'show_player': False, 'in_deck': True},
+        {'value': 10, 'suit': 'club', 'graphics': Club_Jack, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #club Queen
 
         #club King
-        {'value': 12, 'suit': 'club', 'graphics': Club_King, 'show_player': False, 'in_deck': True},
+        {'value': 12, 'suit': 'club', 'graphics': Club_King, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
 
 
         #heart Ace
 
         #heart Jack
-        {'value': 10, 'suit': 'heart', 'graphics': Heart_Jack, 'show_player': False, 'in_deck': True},
+        {'value': 10, 'suit': 'heart', 'graphics': Heart_Jack, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #heart Queen
 
         #heart King
-        {'value': 12, 'suit': 'club', 'graphics': Heart_King, 'show_player': False, 'in_deck': True},
+        {'value': 12, 'suit': 'heart', 'graphics': Heart_King, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
 
 
         #diamond Ace
 
         #diamond Jack
-        {'value': 10, 'suit': 'club', 'graphics': Diamond_Jack, 'show_player': False, 'in_deck': True},
+        {'value': 10, 'suit': 'diamond', 'graphics': Diamond_Jack, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #diamond Queen
 
         #diamond King
-        {'value': 12, 'suit': 'club', 'graphics': Diamond_King, 'show_player': False, 'in_deck': True}
+        {'value': 12, 'suit': 'diamond', 'graphics': Diamond_King, 'show_player': False, 'in_deck': True, 'card_hovered' : False}
 ]
 
 
@@ -875,6 +903,11 @@ def main():
                 if click(background_starting_start_pos):
                     print("Start")
                     start = "poker_singleplayer"
+                    give(cards, table_cards, 3)
+                    print(table_cards)
+                    xpos = x//2-240
+                    
+
 
                 if click(background_starting_info_pos):
                     info = True
@@ -1179,9 +1212,61 @@ def main():
             pg.display.update()
 
         elif start == "poker_singleplayer":
+            if time1 == True:
+                screen.blit(Background_poker, (0,0))
+                time1 = False
+            
+            #mer advancered kod än vad jag är van med, så det är lite svårare att strukturera. Kan förbättras senare. 
+            if table_cards != past_table:
+                for card in table_cards:
+                    card['in_deck'] = False
+                    card['show_player'] = True
+                    
+                    cardi = (card['graphics'])
+                    card_pos = cardi.get_rect()
+                    card_pos.center = (xpos, y//2) 
+                    screen.blit(cardi, card_pos)
+                    xpos+=120
+                    time+=1
+                    #grundläggande kod. En tillfällig lösning innan en bättre lösning blir implementerad korrekt
+                    if time == 1:
+                        pos1 = card_pos
+                    if time == 2:
+                        pos2 = card_pos
+                    if time == 3:
+                        pos3 = card_pos
+                    if time == 4:
+                        pos4 = card_pos
+                    if time == 5:
+                        pos5 = card_pos
+                    if time == len(table_cards):
+                        past_table = table_cards
+                        time = 0
+                        positions = []
+                        positions.append(pos1)
+                        positions.append(pos2)
+                        positions.append(pos3)
+                        if pos4 != pos5:
+                            positions.append(pos4)
+                        if pos5 != pos4:
+                            positions.append(pos5)
 
+            for x in positions:
+                if hover(x) == True:
+                    for cardss in table_cards:
+                        cardss['card_hovered'] = True
+                else:
+                    for cardss in table_cards:
+                        cardss['card_hovered'] = False
 
-            screen.blit(Background_poker, (0,0))
+            for kort in table_cards:
+                if kort['card_hovered'] == True:
+                    for position in positions:
+                        screen.blit(kort['graphics'], position)
+
+            
+                    
+            
             pg.display.update()
 
         if hover_any:
@@ -1193,4 +1278,3 @@ def main():
         clock.tick(60)
 
 if __name__ == '__main__' : main()
-
