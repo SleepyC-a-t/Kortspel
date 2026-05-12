@@ -965,7 +965,7 @@ def main():
                     xpos = x//2-240
                     give(cards, player_cards, 2)
                     print(player_cards)
-                    ypos = y//2-240
+                    
 
                 if click(background_starting_info_pos):
                     info = True
