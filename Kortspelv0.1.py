@@ -1230,15 +1230,15 @@ def main():
                     time+=1
                     #grundläggande kod. En tillfällig lösning innan en bättre lösning blir implementerad korrekt
                     if time == 1:
-                        pos1 = card_pos
+                        pos1 = {'pos' : card_pos, 'graphic' : cardi}
                     if time == 2:
-                        pos2 = card_pos
+                        pos2 = {'pos' : card_pos, 'graphic' : cardi}
                     if time == 3:
-                        pos3 = card_pos
+                        pos3 = {'pos' : card_pos, 'graphic' : cardi}
                     if time == 4:
-                        pos4 = card_pos
+                        pos4 = {'pos' : card_pos, 'graphic' : cardi}
                     if time == 5:
-                        pos5 = card_pos
+                        pos5 = {'pos' : card_pos, 'graphic' : cardi}
                     if time == len(table_cards):
                         past_table = table_cards
                         time = 0
@@ -1252,17 +1252,21 @@ def main():
                             positions.append(pos5)
 
             for x in positions:
-                if hover(x) == True:
+                if hover(x['pos']) == True:
                     for cardss in table_cards:
                         cardss['card_hovered'] = True
+                        print(table_cards)
                 else:
                     for cardss in table_cards:
                         cardss['card_hovered'] = False
 
-            for kort in table_cards:
-                if kort['card_hovered'] == True:
-                    for position in positions:
-                        screen.blit(kort['graphics'], position)
+            for kort in positions:
+                screen.blit(kort['graphic'], kort['pos'])
+
+            #for kort in table_cards:
+            #    if kort['card_hovered'] == True:
+            #        for position in positions:
+            #            screen.blit(kort['graphics'], position)
 
             
                     
