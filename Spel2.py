@@ -107,11 +107,11 @@ def main():
             ballpos.x +=sidemomentum1
 
             if collision(ballpos, wallpos_left):
-                ballpos.left = wallpos_left.right
+                ballpos.left = wallpos_left.right+1
                 sidemomentum1 -= -3
 
             if collision(ballpos, wallpos_right):
-                ballpos.right = wallpos_right.left
+                ballpos.right = wallpos_right.left+1
                 sidemomentum1 -= 3
 
             if collision(ballpos, wallpos_top):
@@ -129,11 +129,11 @@ def main():
             ball2pos.x +=sidemomentum2
 
             if collision(ball2pos, wallpos_left):
-                ball2pos.left = wallpos_left.right
+                ball2pos.left = wallpos_left.right+1
                 sidemomentum2 -= -3
 
             if collision(ball2pos, wallpos_right):
-                ball2pos.right = wallpos_right.left
+                ball2pos.right = wallpos_right.left+1
                 sidemomentum2 -= 3
 
             if collision(ball2pos, wallpos_top):
