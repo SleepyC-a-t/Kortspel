@@ -42,7 +42,9 @@ def main():
     table_cards = []
     player_cards = []
     past_table = False
+    past_player = []
     time = 0
+    timep = 0
     time1 = True
     card_hover = False
     pos4 = 0
@@ -976,6 +978,7 @@ def main():
                     xpos = x//2-240
                     give(cards, player_cards, 2)
                     print(player_cards)
+                    xppos = x//2-60
                     
 
                 if click(background_starting_info_pos):
@@ -1278,27 +1281,24 @@ def main():
 
             screen.blit(text_starting_multi_development, textpos_starting_multi_development)
 
-            pg.display.update()
+            pg.display.u1pdate()
 
         elif start == "poker_singleplayer":
-           for event in events:
-            if event.type == pg.KEYDOWN:
-                if event.key == pg.K_ESCAPE:
-                    pause = True
             if time1 == True:
                 screen.blit(Background_poker, (0,0))
                 time1 = False
             
-            if player_cards != past_table:
+            if player_cards != past_player:
                 for card in player_cards:
                     card['in_deck'] = False
                     card['show_player'] = True
 
                     cardp = (card['graphics'])
                     card_pos = cardp.get_rect()
-                    card_pos.center = (xpos, y//1)
+                    card_pos.center = (xppos, y//2+200)
                     screen.blit(cardp, card_pos)
-            
+                    ypos-=50
+                    
 
             #mer advancered kod än vad jag är van med, så det är lite svårare att strukturera. Kan förbättras senare. 
             if table_cards != past_table:
@@ -1347,6 +1347,8 @@ def main():
             for kort in positions:
                 screen.blit(kort['graphic'], kort['pos'])
 
+            for kort in positions:
+                screen.blit(kort['graphics'], kort['pos'])
             #for kort in table_cards:
             #    if kort['card_hovered'] == True:
             #        for position in positions:
@@ -1372,4 +1374,3 @@ if __name__ == '__main__' : main()
 
 
 
- 
