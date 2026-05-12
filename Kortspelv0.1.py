@@ -909,7 +909,7 @@ def main():
                     xpos = x//2-240
                     give(cards, player_cards, 2)
                     print(player_cards)
-
+                    ypos = y//2-240
 
                 if click(background_starting_info_pos):
                     info = True
@@ -1218,6 +1218,18 @@ def main():
                 screen.blit(Background_poker, (0,0))
                 time1 = False
             
+            if player_cards != past_table:
+                for card in player_cards:
+                    card['in_deck'] = False
+                    card['show_player'] = True
+
+                    cardp = (card['graphics'])
+                    card_pos = cardp.get_rect()
+                    card_pos.center = (xpos, y//1)
+                    screen.blit(cardp, card_pos)
+                    ypos-=50
+                    
+
             #mer advancered kod än vad jag är van med, så det är lite svårare att strukturera. Kan förbättras senare. 
             if table_cards != past_table:
                 for card in table_cards:
