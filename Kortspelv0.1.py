@@ -415,7 +415,7 @@ def main():
     Background_poker = pg.image.load('Graphics/Poker_Table.png')
 
     #ALL THE CARDS
-    Spade_Ace = 1
+    Spade_Ace = pg.image.load("Graphics/Cards/Spaderess.png")
     Spade_Two = pg.image.load('Graphics/Cards/spader2.png')
     Spade_Three = pg.image.load('Graphics/Cards/spader3.png')
     Spade_Four = pg.image.load('Graphics/Cards/spader4.png')
@@ -426,10 +426,10 @@ def main():
     Spade_Nine = pg.image.load('Graphics/Cards/spader9.png')
     Spade_Ten = pg.image.load('Graphics/Cards/spader10.png')
     Spade_Jack = pg.image.load('Graphics/Cards/spaderJ.png')
-    Spade_Queen = 1
+    Spade_Queen= pg.image.load("Graphics/Cards/Spaderdam.png")
     Spade_King = pg.image.load('Graphics/Cards/spaderK.png')
 
-    Club_Ace = 1
+    Club_Ace = pg.image.load("Graphics/Cards/Klöveress.png")
     Club_Two = pg.image.load('Graphics/Cards/klöver2.png')
     Club_Three = pg.image.load('Graphics/Cards/klöver3.png')
     Club_Four = pg.image.load('Graphics/Cards/klöver4.png')
@@ -440,21 +440,41 @@ def main():
     Club_Nine = pg.image.load('Graphics/Cards/klöver9.png')
     Club_Ten = pg.image.load('Graphics/Cards/klöver10.png')
     Club_Jack = pg.image.load('Graphics/Cards/klöverJ.png')
-    Club_Queen = 1
+    Club_Queen = pg.image.load("Graphics/Cards/Klöveress.png")
     Club_King = pg.image.load('Graphics/Cards/klöverK.png')
 
-    Heart_Ace = 1
+    Heart_Ace = pg.image.load("Graphics/Cards/Hjärteress.png")
+    Heart_Two = pg.image.load("Graphics/Cards/Hjärter2.png")
+    Heart_Three = pg.image.load("Graphics/Cards/Hjärter3.png")
+    Heart_Four = pg.image.load("Graphics/Cards/Hjärter4.png")
+    Heart_Five = pg.image.load("Graphics/Cards/Hjärter5.png")
+    Heart_Six = pg.image.load("Graphics/Cards/Hjärter6.png")
+    Heart_Seven = pg.image.load("Graphics/Cards/Hjärter7.png")
+    Heart_Eight = pg.image.load("Graphics/Cards/Hjärter8.png")
+    Heart_Nine = pg.image.load("Graphics/Cards/Hjärter9.png") 
+    Heart_Ten = pg.image.load("Graphics/Cards/Hjärter10.png")
     Heart_Jack = pg.image.load('Graphics/Cards/hjärterJ.png')
+    Heart_Queen = pg.image.load("Graphics/Cards/Hjärterdam.png")
     Heart_King = pg.image.load('Graphics/Cards/hjärterK.png')
 
-    Diamond_Ace = 1
+    Diamond_Ace = pg.image.load("Graphics/Cards/Ruteress.png")
+    Diamond_Two = pg.image.load("Graphics/Cards/Ruter2.png")
+    Diamond_Three = pg.image.load("Graphics/Cards/Ruter3.png")
+    Diamond_Four = pg.image.load("Graphics/Cards/Ruter4.png")
+    Diamond_Five = pg.image.load("Graphics/Cards/Ruter5.png")
+    Diamond_Six = pg.image.load("Graphics/Cards/Ruter6.png")
+    Diamond_Seven = pg.image.load("Graphics/Cards/Ruter7.png")
+    Diamond_Eight = pg.image.load("Graphics/Cards/Ruter8.png")
+    Diamond_Nine = pg.image.load("Graphics/Cards/Ruter9.png")
+    Diamond_Ten = pg.image.load("Graphics/Cards/Ruter10.png")
     Diamond_Jack = pg.image.load('Graphics/Cards/ruterJ.png')
+    Diamond_Queen = pg.image.load("Graphics/Cards/Ruterdam.png")
     Diamond_King = pg.image.load('Graphics/Cards/ruterK.png')
 
     #list in dictionary form for ALL cards
     cards = [
         #spade ace
-        #{'value': 13, 'suit': 'spade', 'graphics': Spade_Ace, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
+        {'value': 13, 'suit': 'spade', 'graphics': Spade_Ace, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #spade 2
         {'value': 1, 'suit': 'spade', 'graphics': Spade_Two, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #spade 3
@@ -476,12 +496,12 @@ def main():
         #spade Jack
         {'value': 10, 'suit': 'spade', 'graphics': Spade_Jack, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #spade Queen
-
+        {'value': 11, 'suit': 'spade', 'graphics': Spade_Queen, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #spade King
         {'value': 12, 'suit': 'spade', 'graphics': Spade_King, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
 
         #club Ace
-        #{'value': 13, 'suit': 'club', 'graphics': Club_Ace, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
+        {'value': 13, 'suit': 'club', 'graphics': Club_Ace, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #club 2
         {'value': 1, 'suit': 'club', 'graphics': Club_Two, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #club 3
@@ -503,27 +523,63 @@ def main():
         #club Jack
         {'value': 10, 'suit': 'club', 'graphics': Club_Jack, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #club Queen
-
+        {'value': 11, 'suit': 'club', 'graphics': Club_Queen, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #club King
         {'value': 12, 'suit': 'club', 'graphics': Club_King, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
 
 
         #heart Ace
-
+        {'value': 13, 'suit': 'heart', 'graphics': Heart_Ace, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
+        #heart 2
+        {'value': 1, 'suit': 'heart', 'graphics': Heart_Two, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
+        #heart 3 
+        {'value': 2, 'suit': 'heart', 'graphics': Heart_Three, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
+        #heart 4 
+        {'value': 3, 'suit': 'heart', 'graphics': Heart_Four, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
+        #heart 5
+        {'value': 4, 'suit': 'heart', 'graphics': Heart_Five, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
+        #heart 6
+        {'value': 5, 'suit': 'heart', 'graphics': Heart_Six, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
+        #heart 7
+        {'value': 6, 'suit': 'heart', 'graphics': Heart_Seven, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
+        #heart 8 
+        {'value': 7, 'suit': 'heart', 'graphics': Heart_Eight, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
+        #heart 9 
+        {'value': 8, 'suit': 'heart', 'graphics': Heart_Nine, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
+        #heart 10 
+        {'value': 9, 'suit': 'heart', 'graphics': Heart_Ten, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #heart Jack
         {'value': 10, 'suit': 'heart', 'graphics': Heart_Jack, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #heart Queen
-
+        {'value': 11, 'suit': 'heart', 'graphics': Heart_Queen, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #heart King
         {'value': 12, 'suit': 'heart', 'graphics': Heart_King, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
 
 
         #diamond Ace
-
+        {'value': 13, 'suit': 'diamond', 'graphics': Diamond_Ace, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
+        #diamond 2
+        {'value': 1, 'suit': 'diamond', 'graphics': Diamond_Two, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
+        #diamond 3 
+        {'value': 2, 'suit': 'diamond', 'graphics': Diamond_Three, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
+        #diamond 4
+        {'value': 3, 'suit': 'diamond', 'graphics': Diamond_Four, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
+        #diamond 5
+        {'value': 4, 'suit': 'diamond', 'graphics': Diamond_Five, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
+        #diamond 6 
+        {'value': 5, 'suit': 'diamond', 'graphics': Diamond_Six, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
+        #diamond 7
+        {'value': 6, 'suit': 'diamond', 'graphics': Diamond_Seven, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
+        #diamond 8
+        {'value': 7, 'suit': 'diamond', 'graphics': Diamond_Eight, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
+        #diamond 9 
+        {'value': 8, 'suit': 'diamond', 'graphics': Diamond_Nine, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
+        #diamond 10
+        {'value': 9, 'suit': 'diamond', 'graphics': Diamond_Ten, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #diamond Jack
         {'value': 10, 'suit': 'diamond', 'graphics': Diamond_Jack, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #diamond Queen
-
+        {'value': 11, 'suit': 'diamond', 'graphics': Diamond_Queen, 'show_player': False, 'in_deck': True, 'card_hovered' : False},
         #diamond King
         {'value': 12, 'suit': 'diamond', 'graphics': Diamond_King, 'show_player': False, 'in_deck': True, 'card_hovered' : False}
 ]
@@ -1214,6 +1270,7 @@ def main():
             pg.display.update()
 
         elif start == "poker_singleplayer":
+            
             if time1 == True:
                 screen.blit(Background_poker, (0,0))
                 time1 = False
@@ -1291,7 +1348,7 @@ def main():
             pg.mouse.set_cursor(pg.SYSTEM_CURSOR_HAND)
         else:
             pg.mouse.set_cursor(pg.SYSTEM_CURSOR_ARROW)
-
+        
         #frame rate
         clock.tick(60)
 
