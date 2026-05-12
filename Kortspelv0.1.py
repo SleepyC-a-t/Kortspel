@@ -47,6 +47,7 @@ def main():
     card_hover = False
     pos4 = 0
     pos5 = 0
+    pause = False
 
     #below is functions used in the code
     def hover_logic(background_pos:int, background:int, colour_before:str, colour_after:str):
@@ -410,6 +411,10 @@ def main():
     text_background2, textpos_background2 = text(fortuner_font, 48, "Bild 2", (10, 10, 10), x//2+275, y//2-50)
     text_background3, textpos_background3 = text(fortuner_font, 48, "Bild 3", (10, 10, 10), x//2-275, y//2+120)
     text_background4, textpos_background4 = text(fortuner_font, 48, "Bild 4", (10, 10, 10), x//2+275, y//2+120)
+    
+    #Background for pause menu in game
+    background_pause, background_pause_pos = button(150, 300, "dimgray", x//2 , y//2)
+
 
     #background for poker game
     Background_poker = pg.image.load('Graphics/Poker_Table.png')
@@ -965,7 +970,7 @@ def main():
                     xpos = x//2-240
                     give(cards, player_cards, 2)
                     print(player_cards)
-
+                    
 
                 if click(background_starting_info_pos):
                     info = True
@@ -1270,11 +1275,22 @@ def main():
             pg.display.update()
 
         elif start == "poker_singleplayer":
-            
             if time1 == True:
                 screen.blit(Background_poker, (0,0))
                 time1 = False
             
+            if player_cards != past_table:
+                for card in player_cards:
+                    card['in_deck'] = False
+                    card['show_player'] = True
+
+                    cardp = (card['graphics'])
+                    card_pos = cardp.get_rect()
+                    card_pos.center = (xpos, y//1)
+                    screen.blit(cardp, card_pos)
+                    ypos-=50
+                    
+
             #mer advancered kod än vad jag är van med, så det är lite svårare att strukturera. Kan förbättras senare. 
             if table_cards != past_table:
                 for card in table_cards:
@@ -1328,7 +1344,8 @@ def main():
             #            screen.blit(kort['graphics'], position)
 
             
-                    
+            if pause==True:
+                screen.blit(background_pause,background_pause_pos)
             
             pg.display.update()
 
@@ -1341,3 +1358,6 @@ def main():
         clock.tick(60)
 
 if __name__ == '__main__' : main()
+
+
+
