@@ -40,6 +40,7 @@ def main():
     buy_chips1 = 0
     chips_amount = buy_chips/chips
     table_cards = []
+    player_cards = []
     past_table = False
     time = 0
     time1 = True
@@ -906,7 +907,8 @@ def main():
                     give(cards, table_cards, 3)
                     print(table_cards)
                     xpos = x//2-240
-                    
+                    give(cards, player_cards, 2)
+                    print(player_cards)
 
 
                 if click(background_starting_info_pos):
