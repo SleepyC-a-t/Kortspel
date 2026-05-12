@@ -102,15 +102,17 @@ def main():
 
             if collision(ballpos, wallpos_bottom):
                 ballpos.bottom = wallpos_bottom.top
-                momentum1 -= momentum1*2
+                momentum1 -= momentum1*2.1
 
             ballpos.x +=sidemomentum1
 
             if collision(ballpos, wallpos_left):
-                sidemomentum1 = 1.6
+                ballpos.left = wallpos_left.right
+                sidemomentum1 -= -3
 
             if collision(ballpos, wallpos_right):
-                sidemomentum1 = -1.6
+                ballpos.right = wallpos_right.left
+                sidemomentum1 -= 3
 
             if collision(ballpos, wallpos_top):
                 ballpos.top = wallpos_top.bottom
@@ -122,15 +124,17 @@ def main():
                 
             if collision(ball2pos, wallpos_bottom):
                 ball2pos.bottom = wallpos_bottom.top
-                momentum2 -= momentum2*2
+                momentum2 -= momentum2*2.1
 
             ball2pos.x +=sidemomentum2
 
             if collision(ball2pos, wallpos_left):
-                sidemomentum2 = 1.6
+                ball2pos.left = wallpos_left.right
+                sidemomentum2 -= -3
 
             if collision(ball2pos, wallpos_right):
-                sidemomentum2 = -1.6
+                ball2pos.right = wallpos_right.left
+                sidemomentum2 -= 3
 
             if collision(ball2pos, wallpos_top):
                 ball2pos.top = wallpos_top.bottom
