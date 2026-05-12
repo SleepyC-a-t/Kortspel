@@ -49,6 +49,7 @@ def main():
     card_hover = False
     pos4 = 0
     pos5 = 0
+    pause = False
 
     #below is functions used in the code
     def hover_logic(background_pos:int, background:int, colour_before:str, colour_after:str):
@@ -412,6 +413,10 @@ def main():
     text_background2, textpos_background2 = text(fortuner_font, 48, "Bild 2", (10, 10, 10), x//2+275, y//2-50)
     text_background3, textpos_background3 = text(fortuner_font, 48, "Bild 3", (10, 10, 10), x//2-275, y//2+120)
     text_background4, textpos_background4 = text(fortuner_font, 48, "Bild 4", (10, 10, 10), x//2+275, y//2+120)
+    
+    #Background for pause menu in game
+    background_pause, background_pause_pos = button(150, 300, "dimgray", x//2 , y//2)
+
 
     #background for poker game
     Background_poker = pg.image.load('Graphics/Poker_Table.png')
@@ -1273,7 +1278,10 @@ def main():
             pg.display.u1pdate()
 
         elif start == "poker_singleplayer":
-            
+           for event in events:
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_ESCAPE:
+                    pause = True
             if time1 == True:
                 screen.blit(Background_poker, (0,0))
                 time1 = False
@@ -1355,7 +1363,8 @@ def main():
             #            screen.blit(kort['graphics'], position)
 
             
-                    
+            if pause==True:
+                screen.blit(background_pause,background_pause_pos)
             
             pg.display.update()
 
