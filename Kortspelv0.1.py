@@ -415,7 +415,7 @@ def main():
     Background_poker = pg.image.load('Graphics/Poker_Table.png')
 
     #ALL THE CARDS
-    Spade_Ace = 1
+    Spade_Ace = pg.image.load("Graphics/Cards/spaderess.png")
     Spade_Two = pg.image.load('Graphics/Cards/spader2.png')
     Spade_Three = pg.image.load('Graphics/Cards/spader3.png')
     Spade_Four = pg.image.load('Graphics/Cards/spader4.png')
