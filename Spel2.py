@@ -29,9 +29,15 @@ def main():
     starting_height2 = [80, 90, 100, 110, 120, 130, 140, 150]
     parry_height = [5, 10, 15, 20, 25]
     angle = 0
+    angle2 = 90
+    angle3 = 180
+    angle4 = 270
     orbit_damage = 0.1
+    orbit_speed = 0.1
+    orbit2_damage = 0.5
     pg.display.set_caption('Battle Balls')
     orbit_di = True
+    sword_damage = 1
 
     def button(width:int, height:int, colour:str, placementx:int, placementy:int):
         """width, height, colour, x, y, returns surface and surface pos"""
@@ -99,8 +105,13 @@ def main():
     ball2, ball2pos = create_circle(radius, (200, 10, 10), x//2+30+rn.choice(starting_positions), y//2-rn.choice(starting_height2))
 
     orbiter, orbiter_pos = create_circle(16, (200,10,10), ball2pos.x+20, ball2pos.y)
+    orbiter2, orbiter2_pos = create_circle(8, (200, 10, 10), ball2pos.x-20, ball2pos.y)
+    orbiter3, orbiter3_pos = create_circle(8, (200, 10, 10), ball2pos.x-20, ball2pos.y)
+    orbiter4, orbiter4_pos = create_circle(8, (200, 10, 10), ball2pos.x-20, ball2pos.y)
+
 
     blue, blue_pos = text(None, 48, "Blue", (10, 10, 10), x//2-500, y//2-250)
+    red, red_pos = text(None, 48, "Red", (10, 10, 10), x//2+500, y//2-250)
 
         
     clock = pg.time.Clock()
@@ -120,7 +131,7 @@ def main():
                 hp1_past = hp1
 
             if hp2 != hp2_past:
-                health2, health2pos = text(None, 48, hp2, (10, 10, 10), x//2+500, y//2-250)
+                health2, health2pos = text(None, 48, round(hp2), (10, 10, 10), x//2+500, y//2-200)
                 hp2_past = hp2
 
             momentum1 += frame_rate/(frame_rate*6)
@@ -208,7 +219,7 @@ def main():
             #else:
             #    parry = False
 
-            if collision(orbiter_pos, swordpos1):
+            if collision(orbiter_pos, swordpos1) and not collision(orbiter_pos, ballpos):
                 parry = True
                 
                 if orbit_di == True:
@@ -221,7 +232,8 @@ def main():
 
             if parry == False:
                 if collision(swordpos1, ball2pos):
-                    hp2-=1
+                    hp2-=sword_damage
+                    sword_damage+=0.02
                     if sidemomentum2<0:
                         sidemomentum2-=1
                     
@@ -252,12 +264,22 @@ def main():
 
                 if collision(orbiter_pos, ballpos):
                     hp1-=orbit_damage
-                    orbit_damage+=0.025
-
+                    orbit_damage+=0.05
+                    orbit_speed *= 1.01
             
+            if collision(orbiter2_pos, ballpos):
+                hp1-=orbit2_damage
 
-            angle = orbit(orbiter_pos, ball2pos.centerx, ball2pos.centery, 60, angle, 0.1, orbit_di)
+            if collision(orbiter3_pos, ballpos):
+                hp1-=orbit2_damage
 
+            if collision(orbiter4_pos, ballpos):
+                hp1-=orbit2_damage
+
+            angle = orbit(orbiter_pos, ball2pos.centerx, ball2pos.centery, 60, angle, orbit_speed, orbit_di)
+            angle2 = orbit(orbiter2_pos, ball2pos.centerx, ball2pos.centery, 90, angle2, 0.1)
+            angle3 = orbit(orbiter3_pos, ball2pos.centerx, ball2pos.centery, 90, angle3, 0.1)
+            angle4 = orbit(orbiter4_pos, ball2pos.centerx, ball2pos.centery, 90, angle4, 0.1)
             
 
             if momentum1 <= 0.5 and collision(ballpos, wallpos_bottom):
@@ -286,28 +308,57 @@ def main():
                 screen.blit(ball2, ball2pos)
                 #screen.blit(sword2, swordpos2)
                 screen.blit(orbiter, orbiter_pos)
+                screen.blit(orbiter2, orbiter2_pos)
+                screen.blit(orbiter3, orbiter3_pos)
+                screen.blit(orbiter4, orbiter4_pos)
             
             screen.blit(health1, health1pos)
             screen.blit(health2, health2pos)
             screen.blit(blue, blue_pos)
+            screen.blit(red, red_pos)
             
-
+            pg.display.update()
             timer+=1
 
             if hp1<1 or hp2<1:
                 mode = "victory"
                 hp1_past = 100
                 hp2_past = 100
+                if hp1>hp2:
+                    hp2 = 0
+                else:
+                    hp1 = 0
 
-            pg.display.update()
+            
 
         if mode == "victory":
             if hp1 != hp1_past:
                 health1, health1pos = text(None, 48, round(hp1), (10, 10, 10), x//2-500, y//2-200)
                 hp1_past = hp1
             if hp2 != hp2_past:
-                health2, health2pos = text(None, 48, hp2, (10, 10, 10), x//2+500, y//2-250)
+                health2, health2pos = text(None, 48, round(hp2), (10, 10, 10), x//2+500, y//2-200)
                 hp2_past = hp2
+            screen.blit(background, backgroundpos)
+            screen.blit(wall_left, wallpos_left)
+            screen.blit(wall_right, wallpos_right)
+            screen.blit(wall_top, wallpos_top)
+            screen.blit(wall_bottom, wallpos_bottom)
+            if hp1>0:
+                screen.blit(ball, ballpos)
+                screen.blit(sword1, swordpos1)
+
+            if hp2>0:
+                screen.blit(ball2, ball2pos)
+                #screen.blit(sword2, swordpos2)
+                screen.blit(orbiter, orbiter_pos)
+                screen.blit(orbiter2, orbiter2_pos)
+                screen.blit(orbiter3, orbiter3_pos)
+                screen.blit(orbiter4, orbiter4_pos)
+            
+            screen.blit(health1, health1pos)
+            screen.blit(health2, health2pos)
+            screen.blit(blue, blue_pos)
+            screen.blit(red, red_pos)
             if hp1>hp2:
                 screen.blit(blue_win, blue_win_pos)
             elif hp2>hp1:

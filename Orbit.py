@@ -10,7 +10,7 @@ def main():
     #screen width
     x = 1200
     #screen height
-    y = 1200
+    y = 600
     screen = pg.display.set_mode((x,y))
     #frame rate
     frame = 1
@@ -75,7 +75,7 @@ def main():
     body_1, body_1_pos = create_circle(10, (10, 10, 10), x//2-20, y//2)
     body_2, body_2_pos = create_circle(10, (10, 10, 10), x//2+20, y//2)
 
-    button_calc, button_calc_pos = create_square(x//8, y//12, "lightgray", x//2, y//2+y//3+x//9)
+    button_calc, button_calc_pos = create_square(x//8, y//12, "lightgray", x//2, y//2+y//3)
 
     while True:
 

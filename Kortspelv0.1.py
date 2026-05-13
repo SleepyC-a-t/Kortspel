@@ -1297,7 +1297,7 @@ def main():
                     card_pos = cardp.get_rect()
                     card_pos.center = (xppos, y//2+200)
                     screen.blit(cardp, card_pos)
-                    ypos-=50
+                    #ypos-=50
                     
 
             #mer advancered kod än vad jag är van med, så det är lite svårare att strukturera. Kan förbättras senare. 
