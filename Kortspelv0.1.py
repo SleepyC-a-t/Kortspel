@@ -415,7 +415,13 @@ def main():
     text_background4, textpos_background4 = text(fortuner_font, 48, "Bild 4", (10, 10, 10), x//2+275, y//2+120)
     
     #Background for pause menu in game
-    background_pause, background_pause_pos = button(150, 300, "dimgray", x//2 , y//2)
+    background_pause, background_pause_pos = button(400, 500, "dimgray", x//2 , y//2)
+    background_pause_frame,background_pause_frame_pos =button(404,504, "black", x//2, y//2)
+
+    #Text for pause menu
+    text_pause,textpos_pause = text(fortuner_font, 48, "Paus Meny", (10, 10, 10), x//2, y//2-160)
+
+    
 
 
     #background for poker game
@@ -447,7 +453,7 @@ def main():
     Club_Nine = pg.image.load('Graphics/Cards/klöver9.png')
     Club_Ten = pg.image.load('Graphics/Cards/klöver10.png')
     Club_Jack = pg.image.load('Graphics/Cards/klöverJ.png')
-    Club_Queen = pg.image.load("Graphics/Cards/Klöveress.png")
+    Club_Queen = pg.image.load("Graphics/Cards/Klöverdam.png")
     Club_King = pg.image.load('Graphics/Cards/klöverK.png')
 
     Heart_Ace = pg.image.load("Graphics/Cards/Hjärteress.png")
@@ -1291,19 +1297,9 @@ def main():
                     card_pos = cardp.get_rect()
                     card_pos.center = (xppos, y//2+200)
                     screen.blit(cardp, card_pos)
-                    timep+=1
-                    xppos+=120
+                    ypos-=50
+                    
 
-                    if timep == 1:
-                        ppos1 = {'pos' : card_pos, 'graphics' : cardp}
-                    if timep == 2:
-                        ppos2 = {'pos' : card_pos, 'graphics' : cardp}
-                    if timep == len(player_cards):
-                        past_player = player_cards
-                        timep = 0
-                        ppositions = []
-                        ppositions.append(ppos1)
-                        ppositions.append(ppos2)
             #mer advancered kod än vad jag är van med, så det är lite svårare att strukturera. Kan förbättras senare. 
             if table_cards != past_table:
                 for card in table_cards:
@@ -1351,7 +1347,7 @@ def main():
             for kort in positions:
                 screen.blit(kort['graphic'], kort['pos'])
 
-            for kort in ppositions:
+            for kort in positions:
                 screen.blit(kort['graphics'], kort['pos'])
             #for kort in table_cards:
             #    if kort['card_hovered'] == True:
@@ -1360,8 +1356,10 @@ def main():
 
             
             if pause==True:
+                screen.blit(background_pause_frame,background_pause_frame_pos)
                 screen.blit(background_pause,background_pause_pos)
-            
+                screen.blit(text_pause, textpos_pause)
+
             pg.display.update()
 
         if hover_any:
